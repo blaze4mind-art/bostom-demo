@@ -270,7 +270,9 @@ h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.025em}
 .case-src:hover{border-color:var(--blue);color:var(--blue)}
 .case-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .case-step{border:0;padding:0;background:none;text-align:left;cursor:zoom-in}
-.case-shot{position:relative;border-radius:14px;overflow:hidden;background:var(--bg);
+/* display:block обязателен — у инлайнового span aspect-ratio не работает,
+   и кадры кейса плющились в непонятные квадраты */
+.case-shot{display:block;position:relative;border-radius:14px;overflow:hidden;background:var(--bg);
   aspect-ratio:1000/530;border:1px solid var(--line);transition:border-color .3s,transform .3s}
 .case-shot img{width:100%;height:100%;object-fit:cover}
 .case-step:hover .case-shot{border-color:var(--blue);transform:translateY(-3px)}
@@ -332,8 +334,10 @@ h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.025em}
 .stars svg{width:16px;height:16px;color:var(--gold)}
 .g-meta{font-size:14px;color:var(--text-3)}
 .g-cta{margin-left:auto}
-.btn-google{background:#fff;color:#1F2933;font-weight:600}
-.btn-google:hover{background:#E8EDF3;transform:translateY(-2px)}
+/* фирменный синий Google, а не белая плашка: белое пятно на тёмном
+   выбивалось из гаммы, а узнаваемость держится на логотипе и звёздах */
+.btn-google{background:#1A73E8;color:#fff;font-weight:600;box-shadow:0 8px 24px -10px rgba(26,115,232,.75)}
+.btn-google:hover{background:#1663CC;transform:translateY(-2px)}
 
 .revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
 .rev{display:flex;flex-direction:column;text-decoration:none;
@@ -358,7 +362,14 @@ h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.025em}
 .ig-card:hover{transform:translateY(-5px)}
 .ig-in{background:var(--bg-2);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;height:100%}
 .ig-shot{position:relative;aspect-ratio:560/994;background:#0A0C10;overflow:hidden;
-  border:0;padding:0;cursor:zoom-in;width:100%}
+  border:0;padding:0;cursor:pointer;width:100%}
+/* значок «сторіc можна подивитись» */
+.ig-shot::before{content:"";position:absolute;z-index:3;left:50%;top:50%;
+  width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;
+  background:rgba(10,12,16,.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat 55% 50%/16px;
+  backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.25);
+  opacity:0;transform:scale(.85);transition:opacity .3s,transform .3s}
+.ig-card:hover .ig-shot::before,.ig-shot:focus-visible::before{opacity:1;transform:none}
 .ig-shot img{width:100%;height:100%;object-fit:cover}
 .ig-shot::after{content:"";position:absolute;inset:auto 0 0;height:50%;
   background:linear-gradient(transparent,rgba(10,12,16,.9));pointer-events:none}
@@ -454,6 +465,41 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
 .viewer-x:hover{background:rgba(255,255,255,.2)}
 .viewer-hint{position:absolute;top:22px;left:0;right:0;text-align:center;font-size:13px;color:var(--text-3)}
 
+/* ---------- Перегляд сторіc ---------- */
+.stories{position:fixed;inset:0;z-index:220;background:rgba(5,7,10,.97);
+  display:grid;place-items:center;padding:12px;
+  opacity:0;visibility:hidden;transition:opacity .28s,visibility .28s}
+.stories.open{opacity:1;visibility:visible}
+.st-frame{position:relative;width:min(420px,100%);max-height:calc(100vh - 24px);
+  aspect-ratio:9/16;background:#000;border-radius:16px;overflow:hidden;
+  box-shadow:0 30px 80px -30px #000}
+.st-frame video,.st-frame img{width:100%;height:100%;object-fit:contain;background:#000}
+.st-bars{position:absolute;top:9px;left:9px;right:9px;display:flex;gap:3px;z-index:4}
+.st-bars i{flex:1;height:2.5px;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden}
+.st-bars i b{display:block;height:100%;width:0;background:#fff;border-radius:3px}
+.st-head{position:absolute;top:20px;left:12px;right:12px;z-index:4;
+  display:flex;align-items:center;gap:9px;
+  text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.st-head b{font-size:13.5px;font-weight:600;color:#fff}
+.st-head time{font-size:12px;color:rgba(255,255,255,.65)}
+.st-close{margin-left:auto;width:36px;height:36px;border-radius:50%;border:0;
+  background:rgba(255,255,255,.14);color:#fff;font-size:22px;line-height:1;cursor:pointer;
+  display:grid;place-items:center}
+.st-close:hover{background:rgba(255,255,255,.26)}
+.st-quote{position:absolute;left:0;right:0;bottom:0;z-index:3;margin:0;
+  padding:60px 18px 20px;font-size:15px;line-height:1.5;color:#EDF1F6;
+  background:linear-gradient(transparent,rgba(5,7,10,.92) 55%)}
+.st-nav{position:absolute;top:0;bottom:0;z-index:5;border:0;background:transparent;cursor:pointer}
+.st-prev{left:0;width:32%}
+.st-next{right:0;width:68%}
+.st-hint{position:absolute;left:0;right:0;bottom:-30px;text-align:center;
+  font-size:12.5px;color:var(--text-3)}
+@media (max-width:520px){
+  .st-frame{width:100%;height:100%;max-height:100%;aspect-ratio:auto;border-radius:0}
+  .stories{padding:0}
+  .st-hint{display:none}
+}
+
 /* Появление */
 .reveal{opacity:0;transform:translateY(22px);
   transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
@@ -472,7 +518,9 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
 /* ---------- Адаптив ---------- */
 @media (max-width:1000px){
   .hero-grid{grid-template-columns:1fr}
-  .hero-media{max-width:380px;margin-inline:auto;order:-1}
+  /* текст первым: заголовок и кнопка записи должны быть видны сразу,
+     без прокрутки. Раньше видео занимало весь первый экран целиком. */
+  .hero-media{max-width:340px;margin-inline:auto;max-height:440px}
   .svc-row{grid-template-columns:auto 1fr;row-gap:14px}
   .svc-tags{grid-column:1/-1;justify-content:flex-start;max-width:none}
   .steps{grid-template-columns:1fr 1fr;gap:30px}
@@ -505,8 +553,14 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
   .book{border-radius:var(--r-lg)}
   .works{grid-template-columns:1fr 1fr;gap:10px}
   .case{border-radius:var(--r-lg)}
+  /* кадры кейса широкие (1000x530) — в одну колонку они читаются,
+     в две превращаются в узкие полоски */
+  .case-steps{grid-template-columns:1fr}
   .credo{grid-template-columns:1fr;gap:12px}
   .credo-img{width:100%;max-width:150px}
+  .g-cta{margin-left:0;width:100%}
+  .g-cta .btn{width:100%}
+  .hero-media{max-width:100%;max-height:400px}
 }
 </style>
 </head>
@@ -1165,6 +1219,24 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
   <a class="btn btn-primary" href="#zapys">Записатися</a>
 </div>
 
+<!-- Перегляд сторіc: справжні сторіc з відео, а не скріншоти -->
+<div class="stories" id="stories" role="dialog" aria-modal="true" aria-label="Сторіc пацієнтів">
+  <div class="st-frame">
+    <div class="st-bars" id="stBars"></div>
+    <div class="st-head">
+      <span class="ig-av ig-grad"><span id="stAv">К</span></span>
+      <span><b id="stName">—</b><br><time id="stMeta">сторіc пацієнта</time></span>
+      <button class="st-close" type="button" id="stClose" aria-label="Закрити">&times;</button>
+    </div>
+    <video id="stVideo" playsinline muted preload="none" hidden></video>
+    <img id="stImg" alt="" hidden>
+    <p class="st-quote" id="stQuote"></p>
+    <button class="st-nav st-prev" type="button" id="stPrev" aria-label="Попередня сторіc"></button>
+    <button class="st-nav st-next" type="button" id="stNext" aria-label="Наступна сторіc"></button>
+    <span class="st-hint">Натисніть праворуч — далі, ліворуч — назад. Утримуйте, щоб поставити на паузу</span>
+  </div>
+</div>
+
 <!-- Просмотр фото во весь экран -->
 <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Перегляд фото">
   <span class="viewer-hint">Натисніть будь-де, щоб закрити</span>
@@ -1336,6 +1408,128 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
         routeVid.pause();      // ушли на карту — не играем в скрытой вкладке
       }
     });
+  });
+
+  /* ================== Перегляд сторіc ==================
+     Настоящие сторис: видео, полоски прогресса, автопереход,
+     тап справа/слева, удержание — пауза. Ровно как в Instagram.
+     Видео без звука: так браузеры не блокируют автозапуск. */
+  var ST_DATA = {
+    st1:{v:'video/stories/web/st1.mp4', who:'dudka_ksenia', av:'К',
+         q:'Коли приїжджаю до Кам’янського, зі спокійною душею тільки до BOSTOM.'},
+    st2:{v:'video/stories/web/st2.mp4', who:'shamreo_21', av:'Ш',
+         q:'Всё топово, налетайте. Тут ушли мои страхи стоматологии.'},
+    st4:{v:'video/stories/web/st4.mp4', who:'anna.nedilkoo', av:'А',
+         q:'Від цього місця віє затишком та професіоналізмом.'},
+    st5:{v:'video/stories/web/st5.mp4', who:'anna.nedilkoo', av:'А',
+         q:'Була зовсім маленька крапочка на зубі, яка ніяк не турбувала. АЛЕ під нею виявилась катастрофа — яку лікар ювелірно усунув.'},
+    st7:{img:'img/stories/web/st7.jpg', dur:5000, who:'juliaorishchenko', av:'Ю',
+         q:'Ви найкращі ❤️'}
+  };
+  // Порядок берём из разметки, а не хардкодим: переставят карточки —
+  // просмотрщик подстроится сам.
+  var stBtns = $$('.ig-shot');
+  var STORIES = stBtns.map(function(b){
+    var key = (b.dataset.full || '').match(/st\d/);
+    var d = key ? ST_DATA[key[0]] : null;
+    if (d && !d.poster) d.poster = 'img/stories/web/' + key[0] + '.jpg';
+    return d;
+  }).filter(Boolean);
+
+  var stBox = $('#stories'), stBars = $('#stBars'), stVideo = $('#stVideo'), stImg = $('#stImg'),
+      stQuote = $('#stQuote'), stName = $('#stName'), stAv = $('#stAv');
+  var stIdx = 0, stTimer = null, stStart = 0, stElapsed = 0, stPaused = false, stOpener = null;
+
+  // полоски по числу сторис
+  STORIES.forEach(function(){ stBars.insertAdjacentHTML('beforeend', '<i><b></b></i>'); });
+  var stFills = $$('#stBars b');
+
+  function stSetFill(i, pct){ stFills[i].style.width = Math.max(0, Math.min(100, pct)) + '%'; }
+
+  function stTick(){
+    if (stPaused) return;
+    var s = STORIES[stIdx], pct;
+    if (s.v){
+      if (!stVideo.duration) return;
+      pct = stVideo.currentTime / stVideo.duration * 100;
+    } else {
+      pct = (Date.now() - stStart + stElapsed) / s.dur * 100;
+    }
+    stSetFill(stIdx, pct);
+    if (pct >= 100) stGo(stIdx + 1);
+  }
+
+  function stGo(i){
+    if (i >= STORIES.length) return stClose();
+    if (i < 0) i = 0;
+    clearInterval(stTimer);
+    stFills.forEach(function(f, n){ f.style.width = n < i ? '100%' : '0%'; });
+    stIdx = i;
+    stPaused = false; stElapsed = 0;
+
+    var s = STORIES[i];
+    stName.textContent = s.who;
+    stAv.textContent = s.av;
+    stQuote.textContent = s.q;
+
+    if (s.v){
+      stImg.hidden = true;
+      stVideo.hidden = false;
+      stVideo.poster = s.poster || '';
+      stVideo.src = s.v;
+      stVideo.currentTime = 0;
+      var p = stVideo.play(); if (p && p.catch) p.catch(function(){});
+    } else {
+      stVideo.pause(); stVideo.removeAttribute('src'); stVideo.hidden = true;
+      stImg.src = s.img; stImg.hidden = false;
+      stStart = Date.now();
+    }
+    stTimer = setInterval(stTick, 60);
+  }
+
+  function stOpen(i){
+    stOpener = document.activeElement;
+    stBox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    stGo(i);
+    $('#stClose').focus();
+  }
+  function stClose(){
+    clearInterval(stTimer);
+    stVideo.pause(); stVideo.removeAttribute('src');
+    stImg.removeAttribute('src');
+    stBox.classList.remove('open');
+    document.body.style.overflow = '';
+    if (stOpener) stOpener.focus();
+  }
+
+  $('#stClose').addEventListener('click', stClose);
+  $('#stPrev').addEventListener('click', function(){ stGo(stIdx - 1); });
+  $('#stNext').addEventListener('click', function(){ stGo(stIdx + 1); });
+  stVideo.addEventListener('ended', function(){ stGo(stIdx + 1); });
+
+  // удержание — пауза
+  function stHold(on){
+    stPaused = on;
+    if (STORIES[stIdx].v){ on ? stVideo.pause() : stVideo.play().catch(function(){}); }
+    else if (on){ stElapsed += Date.now() - stStart; } else { stStart = Date.now(); }
+  }
+  ['mousedown','touchstart'].forEach(function(e){
+    stBox.addEventListener(e, function(){ stHold(true); }, {passive:true}); });
+  ['mouseup','touchend','mouseleave','touchcancel'].forEach(function(e){
+    stBox.addEventListener(e, function(){ stHold(false); }, {passive:true}); });
+
+  addEventListener('keydown', function(e){
+    if (!stBox.classList.contains('open')) return;
+    if (e.key === 'Escape') stClose();
+    if (e.key === 'ArrowRight') stGo(stIdx + 1);
+    if (e.key === 'ArrowLeft') stGo(stIdx - 1);
+  });
+
+  // карточки в разделе отзывов открывают просмотрщик сторис, а не картинку
+  stBtns.forEach(function(b, i){
+    b.removeAttribute('data-full');
+    b.addEventListener('click', function(){ stOpen(i); });
   });
 
   /* --- Просмотр фото во весь экран --- */
