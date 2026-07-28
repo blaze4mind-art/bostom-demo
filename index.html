@@ -368,55 +368,45 @@ h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.025em}
 .ig-all p{font-size:14.5px;color:var(--text-3);margin-top:3px}
 @media (max-width:560px){.ig-all .btn{width:100%}}
 
-/* Уся стрічка актуального: всі 27 сторіc мініатюрами */
-.ig-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:9px;margin-bottom:20px}
-.ig-thumb{position:relative;border:0;padding:2px;border-radius:13px;cursor:pointer;
-  aspect-ratio:9/16;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
-.ig-thumb:hover{transform:translateY(-4px)}
-.ig-thumb img{width:100%;height:100%;object-fit:cover;border-radius:11px;display:block;background:#0A0C10}
-.ig-thumb i{position:absolute;right:6px;top:6px;width:18px;height:18px;border-radius:50%;
-  background:rgba(10,12,16,.66);backdrop-filter:blur(4px);display:grid;place-items:center}
-.ig-thumb i svg{width:9px;height:9px;color:#fff}
-.ig-thumb b{position:absolute;left:0;right:0;bottom:0;padding:16px 6px 5px;font-size:10px;
-  font-weight:500;color:#E7ECF2;text-align:left;line-height:1.25;border-radius:0 0 11px 11px;
-  background:linear-gradient(transparent,rgba(8,10,14,.92));
+
+/* ---- Стрічка сторіc, як в Instagram: гортається вбік ---- */
+.ig-row-wrap{position:relative}
+.ig-row{display:flex;gap:12px;overflow-x:auto;scroll-behavior:smooth;
+  scroll-snap-type:x proximity;padding:2px 2px 10px;
+  scrollbar-width:none;-ms-overflow-style:none}
+.ig-row::-webkit-scrollbar{display:none}
+.ig-story{flex:0 0 auto;width:clamp(132px,20vw,172px);aspect-ratio:9/16;
+  position:relative;border:0;padding:2.5px;border-radius:18px;cursor:pointer;
+  scroll-snap-align:start;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.ig-story:hover{transform:translateY(-5px)}
+.ig-story img{width:100%;height:100%;object-fit:cover;border-radius:15.5px;
+  display:block;background:#0A0C10}
+.ig-story .play{position:absolute;left:50%;top:50%;width:38px;height:38px;margin:-19px 0 0 -19px;
+  border-radius:50%;background:rgba(10,12,16,.5);backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,.28);display:grid;place-items:center;
+  opacity:0;transform:scale(.86);transition:opacity .3s,transform .3s}
+.ig-story .play svg{width:13px;height:13px;color:#fff;margin-left:2px}
+.ig-story:hover .play,.ig-story:focus-visible .play{opacity:1;transform:none}
+.ig-story b{position:absolute;left:0;right:0;bottom:0;padding:22px 9px 8px;font-size:11.5px;
+  font-weight:500;color:#EDF1F6;text-align:left;line-height:1.2;border-radius:0 0 15.5px 15.5px;
+  background:linear-gradient(transparent,rgba(8,10,14,.94));
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@media (max-width:560px){
-  .ig-strip{grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:7px}
-  .ig-thumb b{display:none}
-}
-.ig-revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-.ig-card{border-radius:22px;padding:2px;transition:transform .35s cubic-bezier(.2,.7,.3,1)}
-.ig-card:hover{transform:translateY(-5px)}
-.ig-in{background:var(--bg-2);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;height:100%}
-.ig-shot{position:relative;aspect-ratio:560/994;background:#0A0C10;overflow:hidden;
-  border:0;padding:0;cursor:pointer;width:100%}
-/* значок «сторіc можна подивитись» */
-.ig-shot::before{content:"";position:absolute;z-index:3;left:50%;top:50%;
-  width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;
-  background:rgba(10,12,16,.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat 55% 50%/16px;
-  backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.25);
-  opacity:0;transform:scale(.85);transition:opacity .3s,transform .3s}
-.ig-card:hover .ig-shot::before,.ig-shot:focus-visible::before{opacity:1;transform:none}
-.ig-shot img{width:100%;height:100%;object-fit:cover}
-.ig-shot::after{content:"";position:absolute;inset:auto 0 0;height:50%;
-  background:linear-gradient(transparent,rgba(10,12,16,.9));pointer-events:none}
-.ig-bar{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:3px;z-index:2}
-.ig-bar i{flex:1;height:2px;border-radius:2px;background:rgba(255,255,255,.32)}
-.ig-bar i:first-child{background:rgba(255,255,255,.9)}
-.ig-who{position:absolute;left:13px;top:20px;display:flex;align-items:center;gap:8px;z-index:2}
+/* стрелки прокрутки — только там, где есть мышь */
+.ig-arrow{position:absolute;top:calc(50% - 26px);z-index:3;width:42px;height:42px;border-radius:50%;
+  background:rgba(13,16,20,.9);backdrop-filter:blur(8px);border:1px solid var(--line);
+  color:var(--text);cursor:pointer;display:none;place-items:center;
+  transition:border-color .25s,color .25s,opacity .25s}
+.ig-arrow:hover{border-color:var(--blue);color:var(--blue)}
+.ig-arrow svg{width:18px;height:18px}
+.ig-arrow-l{left:-14px}
+.ig-arrow-r{right:-14px}
+.ig-arrow[disabled]{opacity:.3;pointer-events:none}
+@media (hover:hover) and (min-width:900px){.ig-arrow{display:grid}}
+
+/* аватар в просмотрщике */
 .ig-av{width:28px;height:28px;border-radius:50%;padding:2px;flex-shrink:0}
 .ig-av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;
   background:#12161C;color:#fff;font-size:11.5px;font-weight:700;font-family:var(--display)}
-.ig-who b{font-size:12.5px;font-weight:600;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
-.ig-body{padding:17px 18px 18px;display:flex;flex-direction:column;flex:1}
-.ig-card blockquote{margin:0;font-size:15px;line-height:1.58;color:var(--text-2)}
-.ig-foot{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.ig-handle{font-size:13.5px;color:var(--text-3)}
-.ig-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;
-  color:#fff;text-decoration:none;opacity:.82;min-height:34px}
-.ig-link:hover{opacity:1}
-
 /* FAQ */
 .faq{max-width:820px}
 details{border-bottom:1px solid var(--line)}
@@ -1017,89 +1007,15 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
       </div>
 
       <!-- Уся стрічка: мініатюри всіх 27 сторіc, збираються скриптом -->
-      <div class="ig-strip reveal" id="igStrip"></div>
-
-      <div class="ig-revs">
-        <article class="ig-card ig-grad reveal">
-          <div class="ig-in">
-            <button class="ig-shot" type="button" data-full="img/stories/web/st1.jpg" data-cap="@dudka_ksenia — сторіc про клініку BOSTOM">
-              <span class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="ig-who"><span class="ig-av ig-grad"><span>К</span></span><b>dudka_ksenia</b></span>
-              <picture><source srcset="img/stories/web/st1.webp" type="image/webp">
-                <img src="img/stories/web/st1.jpg" width="560" height="994" loading="lazy" decoding="async" alt="Сторіc пацієнтки про стоматологію BOSTOM"></picture>
-            </button>
-            <div class="ig-body">
-              <blockquote>Коли приїжджаю до Кам'янського, зі спокійною душею тільки до BOSTOM.</blockquote>
-              <div class="ig-foot"><span class="ig-handle">@dudka_ksenia</span>
-                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="ig-card ig-grad reveal">
-          <div class="ig-in">
-            <button class="ig-shot" type="button" data-full="img/stories/web/st4.jpg" data-cap="@anna.nedilkoo — зона очікування клініки">
-              <span class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="ig-who"><span class="ig-av ig-grad"><span>А</span></span><b>anna.nedilkoo</b></span>
-              <picture><source srcset="img/stories/web/st4.webp" type="image/webp">
-                <img src="img/stories/web/st4.jpg" width="560" height="994" loading="lazy" decoding="async" alt="Сторіc пацієнтки: зона очікування клініки BOSTOM"></picture>
-            </button>
-            <div class="ig-body">
-              <blockquote>Від цього місця віє затишком та професіоналізмом.</blockquote>
-              <div class="ig-foot"><span class="ig-handle">@anna.nedilkoo</span>
-                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="ig-card ig-grad reveal">
-          <div class="ig-in">
-            <button class="ig-shot" type="button" data-full="img/stories/web/st2.jpg" data-cap="@shamreo_21 — сторіc про клініку BOSTOM">
-              <span class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="ig-who"><span class="ig-av ig-grad"><span>Ш</span></span><b>shamreo_21</b></span>
-              <picture><source srcset="img/stories/web/st2.webp" type="image/webp">
-                <img src="img/stories/web/st2.jpg" width="560" height="994" loading="lazy" decoding="async" alt="Сторіc пацієнта про клініку BOSTOM"></picture>
-            </button>
-            <div class="ig-body">
-              <!-- цитата в оригіналі: перекладати чужий відгук не можна -->
-              <blockquote lang="ru">Всё топово, налетайте. Тут ушли мои страхи стоматологии.</blockquote>
-              <div class="ig-foot"><span class="ig-handle">@shamreo_21</span>
-                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="ig-card ig-grad reveal">
-          <div class="ig-in">
-            <button class="ig-shot" type="button" data-full="img/stories/web/st7.jpg" data-cap="@juliaorishchenko — сторіc з вивіскою клініки">
-              <span class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="ig-who"><span class="ig-av ig-grad"><span>Ю</span></span><b>juliaorishchenko</b></span>
-              <picture><source srcset="img/stories/web/st7.webp" type="image/webp">
-                <img src="img/stories/web/st7.jpg" width="560" height="996" loading="lazy" decoding="async" alt="Сторіc пацієнтки з вивіскою клініки BOSTOM"></picture>
-            </button>
-            <div class="ig-body">
-              <blockquote>Ви найкращі ❤️</blockquote>
-              <div class="ig-foot"><span class="ig-handle">@juliaorishchenko</span>
-                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="ig-card ig-grad reveal">
-          <div class="ig-in">
-            <button class="ig-shot" type="button" data-full="img/stories/web/st5.jpg" data-cap="@anna.nedilkoo — про виявлений прихований карієс">
-              <span class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="ig-who"><span class="ig-av ig-grad"><span>А</span></span><b>anna.nedilkoo</b></span>
-              <picture><source srcset="img/stories/web/st5.webp" type="image/webp">
-                <img src="img/stories/web/st5.jpg" width="560" height="994" loading="lazy" decoding="async" alt="Сторіc пацієнтки про прихований карієс"></picture>
-            </button>
-            <div class="ig-body">
-              <blockquote>Була зовсім маленька крапочка на зубі, яка ніяк не турбувала. АЛЕ під нею виявилась катастрофа — яку лікар ювелірно усунув.</blockquote>
-              <div class="ig-foot"><span class="ig-handle">@anna.nedilkoo</span>
-                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a></div>
-            </div>
-          </div>
-        </article>
+      <!-- Стрічка сторіc, як в Instagram: гортається вбік, усі 27 підряд -->
+      <div class="ig-row-wrap reveal">
+        <button class="ig-arrow ig-arrow-l" type="button" id="igPrev" aria-label="Прокрутити ліворуч">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="ig-row" id="igRow"></div>
+        <button class="ig-arrow ig-arrow-r" type="button" id="igNext" aria-label="Прокрутити праворуч">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -1489,8 +1405,6 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
     else { o.img = 'img/stories/feed/' + r[0] + '.jpg'; o.dur = 5000; }
     return o;
   });
-  var stBtns = $$('.ig-shot');
-
   var stBox = $('#stories'), stBars = $('#stBars'), stVideo = $('#stVideo'), stImg = $('#stImg'),
       stQuote = $('#stQuote'), stName = $('#stName'), stAv = $('#stAv');
   var stIdx = 0, stTimer = null, stStart = 0, stElapsed = 0, stPaused = false, stOpener = null;
@@ -1583,34 +1497,43 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
     if (e.key === 'ArrowLeft') stGo(stIdx - 1);
   });
 
-  // Карточка открывает просмотрщик на своей сторіc внутри полного списка:
-  // имя файла stN совпадает с номером сторіc в актуальному.
-  stBtns.forEach(function(b){
-    var m = (b.dataset.full || '').match(/st(\d+)/);
-    var idx = m ? parseInt(m[1], 10) : 0;
-    b.removeAttribute('data-full');
-    b.addEventListener('click', function(){ stOpen(idx); });
-  });
   var allBtn = $('#stAll');
   if (allBtn) allBtn.addEventListener('click', function(){ stOpen(0); });
 
-  // Уся стрічка: рисуем все 27 мініатюр. Разметку собираем скриптом —
-  // 27 однотипных блоков в HTML только раздули бы страницу.
-  var strip = $('#igStrip');
-  if (strip){
+  /* Стрічка сторіc: усі 27 підряд, гортається вбік.
+     Розмітку збирає скрипт — 27 однакових блоків у HTML лише роздули б сторінку. */
+  var igRow = $('#igRow');
+  if (igRow){
     STORIES.forEach(function(s, i){
       var b = document.createElement('button');
       b.type = 'button';
-      b.className = 'ig-thumb' + (s.v ? ' ig-grad' : '');
+      b.className = 'ig-story' + (s.v ? ' ig-grad' : '');
       if (!s.v) b.style.background = 'var(--line)';
       b.setAttribute('aria-label', 'Сторіc ' + (i + 1) + ' з ' + STORIES.length + ' — ' + s.who);
       b.innerHTML =
         '<img src="' + s.poster + '" loading="lazy" decoding="async" alt="Сторіc пацієнта про клініку BOSTOM">' +
-        (s.v ? '<i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></i>' : '') +
+        (s.v ? '<span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>' : '') +
         '<b>@' + s.who + '</b>';
       b.addEventListener('click', function(){ stOpen(i); });
-      strip.appendChild(b);
+      igRow.appendChild(b);
     });
+
+    // стрелки прокрутки на десктопе
+    var igPrev = $('#igPrev'), igNext = $('#igNext');
+    function igStep(){ return Math.round(igRow.clientWidth * 0.8); }
+    function igSync(){
+      var max = igRow.scrollWidth - igRow.clientWidth - 2;
+      igPrev.disabled = igRow.scrollLeft <= 2;
+      igNext.disabled = igRow.scrollLeft >= max;
+    }
+    igPrev.addEventListener('click', function(){ igRow.scrollLeft -= igStep(); });
+    igNext.addEventListener('click', function(){ igRow.scrollLeft += igStep(); });
+    igRow.addEventListener('scroll', igSync, {passive:true});
+    addEventListener('resize', igSync);
+    // При загрузке вкладка Instagram скрыта, ширина стрічки = 0, и обе стрелки
+    // получались отключёнными. ResizeObserver пересчитает, как только покажут.
+    if ('ResizeObserver' in window) new ResizeObserver(igSync).observe(igRow);
+    igSync();
   }
 
   /* --- Просмотр фото во весь экран --- */
@@ -1647,6 +1570,8 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
       tabs.forEach(function(x){ x.setAttribute('aria-selected', String(x === t)); });
       panes.forEach(function(p){ p.hidden = p.dataset.pane !== t.dataset.src; });
       $$('.reveal', $('[data-pane="' + t.dataset.src + '"]')).forEach(function(el){ el.classList.add('in'); });
+      // пока вкладка была скрыта, её ширина равнялась нулю — пересчитываем
+      dispatchEvent(new Event('resize'));
     });
   });
 
