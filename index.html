@@ -367,6 +367,24 @@ h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.025em}
 .ig-all b{font-family:var(--display);font-size:16.5px;font-weight:600;display:block}
 .ig-all p{font-size:14.5px;color:var(--text-3);margin-top:3px}
 @media (max-width:560px){.ig-all .btn{width:100%}}
+
+/* Уся стрічка актуального: всі 27 сторіc мініатюрами */
+.ig-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:9px;margin-bottom:20px}
+.ig-thumb{position:relative;border:0;padding:2px;border-radius:13px;cursor:pointer;
+  aspect-ratio:9/16;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.ig-thumb:hover{transform:translateY(-4px)}
+.ig-thumb img{width:100%;height:100%;object-fit:cover;border-radius:11px;display:block;background:#0A0C10}
+.ig-thumb i{position:absolute;right:6px;top:6px;width:18px;height:18px;border-radius:50%;
+  background:rgba(10,12,16,.66);backdrop-filter:blur(4px);display:grid;place-items:center}
+.ig-thumb i svg{width:9px;height:9px;color:#fff}
+.ig-thumb b{position:absolute;left:0;right:0;bottom:0;padding:16px 6px 5px;font-size:10px;
+  font-weight:500;color:#E7ECF2;text-align:left;line-height:1.25;border-radius:0 0 11px 11px;
+  background:linear-gradient(transparent,rgba(8,10,14,.92));
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:560px){
+  .ig-strip{grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:7px}
+  .ig-thumb b{display:none}
+}
 .ig-revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
 .ig-card{border-radius:22px;padding:2px;transition:transform .35s cubic-bezier(.2,.7,.3,1)}
 .ig-card:hover{transform:translateY(-5px)}
@@ -997,6 +1015,10 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
           Дивитись усі
         </button>
       </div>
+
+      <!-- Уся стрічка: мініатюри всіх 27 сторіc, збираються скриптом -->
+      <div class="ig-strip reveal" id="igStrip"></div>
+
       <div class="ig-revs">
         <article class="ig-card ig-grad reveal">
           <div class="ig-in">
@@ -1571,6 +1593,25 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
   });
   var allBtn = $('#stAll');
   if (allBtn) allBtn.addEventListener('click', function(){ stOpen(0); });
+
+  // Уся стрічка: рисуем все 27 мініатюр. Разметку собираем скриптом —
+  // 27 однотипных блоков в HTML только раздули бы страницу.
+  var strip = $('#igStrip');
+  if (strip){
+    STORIES.forEach(function(s, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ig-thumb' + (s.v ? ' ig-grad' : '');
+      if (!s.v) b.style.background = 'var(--line)';
+      b.setAttribute('aria-label', 'Сторіc ' + (i + 1) + ' з ' + STORIES.length + ' — ' + s.who);
+      b.innerHTML =
+        '<img src="' + s.poster + '" loading="lazy" decoding="async" alt="Сторіc пацієнта про клініку BOSTOM">' +
+        (s.v ? '<i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></i>' : '') +
+        '<b>@' + s.who + '</b>';
+      b.addEventListener('click', function(){ stOpen(i); });
+      strip.appendChild(b);
+    });
+  }
 
   /* --- Просмотр фото во весь экран --- */
   var viewer = $('#viewer'), vImg = $('#viewerImg'), vCap = $('#viewerCap'), lastFocus = null;
