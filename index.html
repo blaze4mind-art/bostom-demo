@@ -257,6 +257,52 @@ h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.025em}
   color:#fff;opacity:0;transform:scale(.85);transition:opacity .3s,transform .3s}
 .work:hover .zoom,.work:focus-visible .zoom{opacity:1;transform:none}
 
+/* Кейс по этапам */
+.case{margin-top:clamp(30px,4vw,48px);border:1px solid var(--line);border-radius:var(--r-xl);
+  background:linear-gradient(150deg,var(--surface),var(--bg-2));padding:clamp(20px,3vw,32px);overflow:hidden}
+.case-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;margin-bottom:20px}
+.case-head h3{font-size:clamp(19px,2.2vw,24px)}
+.case-head p{color:var(--text-3);font-size:14.5px;margin-top:5px}
+.case-src{font-size:13px;color:var(--text-3);text-decoration:none;display:inline-flex;
+  align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:7px 13px;
+  transition:border-color .25s,color .25s}
+.case-src:hover{border-color:var(--blue);color:var(--blue)}
+.case-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.case-step{border:0;padding:0;background:none;text-align:left;cursor:zoom-in}
+.case-shot{position:relative;border-radius:14px;overflow:hidden;background:var(--bg);
+  aspect-ratio:1000/530;border:1px solid var(--line);transition:border-color .3s,transform .3s}
+.case-shot img{width:100%;height:100%;object-fit:cover}
+.case-step:hover .case-shot{border-color:var(--blue);transform:translateY(-3px)}
+.case-num{position:absolute;top:8px;left:8px;width:24px;height:24px;border-radius:50%;
+  background:rgba(9,11,14,.78);backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:600;
+  display:grid;place-items:center;font-family:var(--display)}
+.case-cap{display:block;margin-top:9px;font-size:13.5px;color:var(--text-2);line-height:1.45}
+
+/* Квалификация врача */
+.credo{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;
+  margin-top:24px;padding:16px;border:1px solid var(--line);border-radius:var(--r-md);
+  background:rgba(255,255,255,.02);text-decoration:none;transition:border-color .3s}
+.credo:hover{border-color:var(--blue)}
+.credo-img{width:92px;border-radius:12px;overflow:hidden;flex-shrink:0;border:1px solid var(--line)}
+.credo-img img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/4}
+.credo b{display:block;font-family:var(--display);font-size:16px;font-weight:600;margin-bottom:4px}
+.credo p{font-size:14.5px;color:var(--text-3)}
+.credo span{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--blue);margin-top:7px}
+
+/* Видео «як нас знайти» */
+.route{position:relative;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);
+  background:#0A0C10;aspect-ratio:9/16;max-height:340px;margin-top:22px}
+.route video,.route img{width:100%;height:100%;object-fit:cover}
+.route-play{position:absolute;inset:0;border:0;background:linear-gradient(transparent 40%,rgba(9,11,14,.9));
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:10px;
+  padding:0 16px 18px;cursor:pointer;color:#fff}
+.route-play i{width:52px;height:52px;border-radius:50%;background:var(--blue);display:grid;
+  place-items:center;box-shadow:0 10px 30px -10px rgba(59,141,255,.9);transition:transform .3s}
+.route-play:hover i{transform:scale(1.08)}
+.route-play b{font-family:var(--display);font-size:15px;font-weight:600}
+.route-play small{font-size:12.5px;color:var(--text-2)}
+
 /* Врач */
 .doc{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(26px,5vw,58px);align-items:center}
 .doc-photo{border-radius:78px var(--r-xl) var(--r-xl) var(--r-xl);overflow:hidden;
@@ -437,6 +483,7 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
   .book-grid{grid-template-columns:1fr}
   .trust-in{grid-template-columns:1fr 1fr}
   .works{grid-template-columns:1fr 1fr}
+  .case-steps{grid-template-columns:1fr 1fr}
 }
 @media (max-width:760px){
   .hdr-phone small{display:none}
@@ -458,6 +505,9 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
   .to-top{bottom:84px;right:14px}
   .book{border-radius:var(--r-lg)}
   .works{grid-template-columns:1fr 1fr;gap:10px}
+  .case{border-radius:var(--r-lg)}
+  .credo{grid-template-columns:1fr;gap:12px}
+  .credo-img{width:100%;max-width:150px}
 }
 </style>
 </head>
@@ -699,6 +749,46 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
         <figcaption>Прихований карієс</figcaption>
       </button>
     </div>
+
+    <!-- Разобранный по этапам кейс: instagram.com/p/DJn_SABNZFE -->
+    <div class="case reveal">
+      <div class="case-head">
+        <div>
+          <h3>Кейс: діоксидцирконієві коронки</h3>
+          <p>Зуби 2.4, 2.5, 2.6 — від моделі до готового результату</p>
+        </div>
+        <a class="case-src" href="https://www.instagram.com/p/DJn_SABNZFE/" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>
+          Повний кейс в Instagram
+        </a>
+      </div>
+      <div class="case-steps">
+        <button class="case-step" type="button" data-full="img/case/web/zr1.jpg" data-cap="Крок 1. Діоксидцирконієві коронки на зуби 2.4, 2.5, 2.6 на моделі">
+          <span class="case-shot"><span class="case-num">1</span>
+            <picture><source srcset="img/case/web/zr1.webp" type="image/webp">
+              <img src="img/case/web/zr1.jpg" width="1000" height="530" loading="lazy" decoding="async" alt="Діоксидцирконієві коронки на моделі"></picture></span>
+          <span class="case-cap">Коронки на моделі</span>
+        </button>
+        <button class="case-step" type="button" data-full="img/case/web/zr2.jpg" data-cap="Крок 2. Препарування — підготовка зубів для встановлення коронок">
+          <span class="case-shot"><span class="case-num">2</span>
+            <picture><source srcset="img/case/web/zr2.webp" type="image/webp">
+              <img src="img/case/web/zr2.jpg" width="1000" height="530" loading="lazy" decoding="async" alt="Препарування зубів під коронки"></picture></span>
+          <span class="case-cap">Препарування зубів</span>
+        </button>
+        <button class="case-step" type="button" data-full="img/case/web/zr3.jpg" data-cap="Крок 3. Результат — коронки встановлені">
+          <span class="case-shot"><span class="case-num">3</span>
+            <picture><source srcset="img/case/web/zr3.webp" type="image/webp">
+              <img src="img/case/web/zr3.jpg" width="1000" height="530" loading="lazy" decoding="async" alt="Встановлені діоксидцирконієві коронки"></picture></span>
+          <span class="case-cap">Результат</span>
+        </button>
+        <button class="case-step" type="button" data-full="img/case/web/zr4.jpg" data-cap="Крок 4. Результат — вигляд у порожнині рота">
+          <span class="case-shot"><span class="case-num">4</span>
+            <picture><source srcset="img/case/web/zr4.webp" type="image/webp">
+              <img src="img/case/web/zr4.jpg" width="1000" height="530" loading="lazy" decoding="async" alt="Готовий результат протезування коронками"></picture></span>
+          <span class="case-cap">Результат</span>
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -718,7 +808,23 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Понад 8 років практики</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Повний цикл: терапія, ортопедія, хірургія</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Робота під ізоляцією, сучасне знеболення</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Постійно вчиться: протезування з рівня імпланта</span></li>
       </ul>
+
+      <!-- Курс от @dr_mordik: instagram.com/p/DKTupSYom_T -->
+      <a class="credo" href="https://www.instagram.com/p/DKTupSYom_T/" target="_blank" rel="noopener">
+        <div class="credo-img">
+          <picture><source srcset="img/web/course.webp" type="image/webp">
+            <img src="img/web/course.jpg" width="760" height="934" loading="lazy" decoding="async" alt="Індивідуальний курс з протезування з рівня імпланта"></picture>
+        </div>
+        <div>
+          <b>Індивідуальний курс з протезування з рівня імпланта</b>
+          <p>Ведення робіт з рівня імпланта та перемикаючих платформ. Навчання у Станіслава Мордика (@dr_mordik).</p>
+          <span>Публікація в Instagram
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </span>
+        </div>
+      </a>
       <div class="hero-cta" style="margin-top:26px">
         <a class="btn btn-primary" href="#zapys">Записатися до лікаря</a>
         <a class="btn btn-ghost" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram</a>
@@ -857,6 +963,39 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
 
         <article class="ig-card ig-grad reveal">
           <div class="ig-in">
+            <button class="ig-shot" type="button" data-full="img/stories/web/st2.jpg" data-cap="@shamreo_21 — сторіc про клініку BOSTOM">
+              <span class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ig-who"><span class="ig-av ig-grad"><span>Ш</span></span><b>shamreo_21</b></span>
+              <picture><source srcset="img/stories/web/st2.webp" type="image/webp">
+                <img src="img/stories/web/st2.jpg" width="560" height="994" loading="lazy" decoding="async" alt="Сторіc пацієнта про клініку BOSTOM"></picture>
+            </button>
+            <div class="ig-body">
+              <!-- цитата в оригіналі: перекладати чужий відгук не можна -->
+              <blockquote lang="ru">Всё топово, налетайте. Тут ушли мои страхи стоматологии.</blockquote>
+              <div class="ig-foot"><span class="ig-handle">@shamreo_21</span>
+                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="ig-card ig-grad reveal">
+          <div class="ig-in">
+            <button class="ig-shot" type="button" data-full="img/stories/web/st7.jpg" data-cap="@juliaorishchenko — сторіc з вивіскою клініки">
+              <span class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ig-who"><span class="ig-av ig-grad"><span>Ю</span></span><b>juliaorishchenko</b></span>
+              <picture><source srcset="img/stories/web/st7.webp" type="image/webp">
+                <img src="img/stories/web/st7.jpg" width="560" height="996" loading="lazy" decoding="async" alt="Сторіc пацієнтки з вивіскою клініки BOSTOM"></picture>
+            </button>
+            <div class="ig-body">
+              <blockquote>Ви найкращі ❤️</blockquote>
+              <div class="ig-foot"><span class="ig-handle">@juliaorishchenko</span>
+                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="ig-card ig-grad reveal">
+          <div class="ig-in">
             <button class="ig-shot" type="button" data-full="img/stories/web/st5.jpg" data-cap="@anna.nedilkoo — про виявлений прихований карієс">
               <span class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></span>
               <span class="ig-who"><span class="ig-av ig-grad"><span>А</span></span><b>anna.nedilkoo</b></span>
@@ -939,6 +1078,20 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
             <iframe src="https://maps.google.com/maps?q=%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%B8%2050%2C%20%D0%9A%D0%B0%D0%BC%27%D1%8F%D0%BD%D1%81%D1%8C%D0%BA%D0%B5&z=16&output=embed"
               title="Клініка BOSTOM на карті — проспект Свободи, 50" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
+
+          <!-- Відео «як до нас дістатися»: instagram.com/p/DJbn-XvtFmF
+               Грузится только по клику — 2,2 МБ не должны висеть на всех. -->
+          <figure class="route" id="route" style="margin:0">
+            <video id="routeVideo" poster="video/route-poster.jpg" playsinline preload="none"
+                   aria-label="Відео: як дістатися до клініки BOSTOM">
+              <source src="video/route-web.mp4" type="video/mp4">
+            </video>
+            <button class="route-play" type="button" id="routePlay">
+              <i><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></i>
+              <b>Як до нас дістатися</b>
+              <small>27 секунд · дорога від зупинки до дверей</small>
+            </button>
+          </figure>
         </div>
 
         <div>
@@ -1158,6 +1311,19 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
       if (!document.hidden) tryPlay();
     });
     vid.addEventListener('loadeddata', tryPlay, {once:true});
+  }
+
+  /* --- Видео «як нас знайти»: грузим только по клику, оно тяжёлое --- */
+  var routeBtn = $('#routePlay'), routeVid = $('#routeVideo');
+  if (routeBtn && routeVid){
+    routeBtn.addEventListener('click', function(){
+      routeVid.preload = 'auto';
+      routeVid.controls = true;
+      routeVid.load();
+      var p = routeVid.play();
+      if (p && p.catch) p.catch(function(){});
+      routeBtn.remove();
+    });
   }
 
   /* --- Просмотр фото во весь экран --- */
