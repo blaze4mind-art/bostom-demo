@@ -147,7 +147,10 @@ p{margin:0}
 .btn[disabled]{opacity:.55;pointer-events:none}
 
 /* ---------- Hero ---------- */
-.hero{padding:clamp(34px,5vw,66px) 0 var(--gap)}
+/* снизу ноль: отступ между блоками задаёт верх следующей секции.
+   Раньше здесь стояла полоса с цифрами, теперь её нет — иначе выходил
+   двойной промежуток. */
+.hero{padding:clamp(34px,5vw,66px) 0 0}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,60px);align-items:center}
 .kicker{display:inline-flex;align-items:center;gap:9px;font-family:var(--display);
   font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--blue);margin-bottom:20px;
@@ -206,7 +209,8 @@ h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.025em}
 .svc-row:hover .svc-ic{transform:translateY(-3px) scale(1.06)}
 .svc-row h3{font-size:clamp(21px,2.4vw,27px);margin-bottom:7px}
 .svc-row p{color:var(--text-3);font-size:15.5px;max-width:46ch}
-.svc-tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end;max-width:290px}
+/* на широком экране теги идут одной строкой и не переносятся */
+.svc-tags{display:flex;flex-wrap:nowrap;gap:7px;justify-content:flex-end}
 .svc-tags span{font-size:13px;color:var(--text-2);border:1px solid var(--line);
   border-radius:99px;padding:5px 12px;white-space:nowrap}
 
@@ -528,7 +532,8 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
      без прокрутки. Раньше видео занимало весь первый экран целиком. */
   .hero-media{max-width:340px;margin-inline:auto;max-height:440px}
   .svc-row{grid-template-columns:auto 1fr;row-gap:14px}
-  .svc-tags{grid-column:1/-1;justify-content:flex-start;max-width:none}
+  /* на узком экране одной строкой они не помещаются — тут перенос уместен */
+  .svc-tags{grid-column:1/-1;justify-content:flex-start;flex-wrap:wrap}
   .steps{grid-template-columns:1fr 1fr;gap:30px}
   .steps::before,.steps::after{display:none}
   .doc{grid-template-columns:1fr}
@@ -670,14 +675,9 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
   </div>
 </section>
 
-<div class="trust">
-  <div class="trust-in">
-    <div class="trust-cell"><b>8+</b><span>років досвіду</span></div>
-    <div class="trust-cell"><b>3</b><span>напрями лікування</span></div>
-    <div class="trust-cell"><b>1</b><span>лікар веде вас</span></div>
-    <div class="trust-cell"><b>5,0</b><span>оцінка в Google</span></div>
-  </div>
-</div>
+<!-- Полоса с цифрами убрана: все четыре числа уже сказаны рядом.
+     «8+» и «5,0» — в першому екрані, «3 напрями» и «1 лікар» — дословно
+     заголовок наступного розділу «Три напрями, один лікар». -->
 
 <!-- ================= ПОСЛУГИ ================= -->
 <section id="poslugy">
@@ -695,7 +695,7 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
           <h3>Терапія</h3>
           <p>Карієс і канали зі збереженням живої тканини зуба.</p>
         </div>
-        <div class="svc-tags"><span>Карієс</span><span>Канали</span><span>Реставрація</span><span>Гігієна</span></div>
+        <div class="svc-tags"><span>Карієс</span><span>Канали</span><span>Гігієна</span></div>
       </article>
 
       <article class="svc-row reveal">
@@ -706,7 +706,7 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
           <h3>Ортопедія</h3>
           <p>Коронки та протези, які повертають жування і не виглядають штучно.</p>
         </div>
-        <div class="svc-tags"><span>Коронки</span><span>Вініри</span><span>Мости</span><span>На імплантах</span></div>
+        <div class="svc-tags"><span>Коронки</span><span>Вініри</span><span>На імплантах</span></div>
       </article>
 
       <article class="svc-row reveal">
@@ -717,7 +717,7 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
           <h3>Хірургія</h3>
           <p>Видалення будь-якої складності та підготовка до протезування.</p>
         </div>
-        <div class="svc-tags"><span>Видалення</span><span>«Вісімки»</span><span>Під імплант</span><span>Ясна</span></div>
+        <div class="svc-tags"><span>Видалення</span><span>«Вісімки»</span><span>Під імплант</span></div>
       </article>
     </div>
   </div>
