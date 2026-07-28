@@ -36,7 +36,10 @@
 <meta property="og:site_name" content="BOSTOM — стоматологія">
 <meta property="og:title" content="Стоматологія BOSTOM — Кам'янське, проспект Свободи 50">
 <meta property="og:description" content="Терапія, ортопедія, хірургія. Лікар Дмитро Боднар. Рейтинг 5,0 у Google.">
-<meta property="og:image" content="https://bostom.com.ua/video/hero-poster.jpg">
+<!-- для ссылки в мессенджерах лучше лицо врача, а не кадр з обладнанням -->
+<meta property="og:image" content="https://bostom.com.ua/img/web/p8.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1778">
 <meta property="og:locale" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -553,7 +556,7 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
              aria-label="Відео клініки BOSTOM у Кам'янському">
         <source src="video/hero-web.mp4" type="video/mp4">
       </video>
-      <figcaption><b>Дмитро Боднар</b>лікар-стоматолог, понад 8 років практики</figcaption>
+      <figcaption><b>Не турбує зубний біль?</b>Це ще не означає, що проблем немає</figcaption>
     </figure>
   </div>
 </section>
@@ -703,8 +706,10 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
 <section id="likar">
   <div class="wrap doc">
     <div class="doc-photo reveal">
-      <picture><source srcset="img/web/p7.webp" type="image/webp">
-        <img src="img/web/p7.jpg" width="900" height="1600" loading="lazy" decoding="async" alt="Лікар Дмитро Боднар під час лікування зуба"></picture>
+      <!-- портрет переехал сюда из шапки: в видео лица врача нет,
+           а доверие держится именно на нём -->
+      <picture><source srcset="img/web/p8.webp" type="image/webp">
+        <img src="img/web/p8.jpg" width="1000" height="1778" loading="lazy" decoding="async" alt="Лікар-стоматолог Дмитро Боднар у клініці BOSTOM, Кам'янське"></picture>
     </div>
     <div class="reveal">
       <h2>Дмитро Боднар</h2>
@@ -1014,7 +1019,7 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
   "@context":"https://schema.org","@type":"Dentist",
   "name":"BOSTOM",
   "description":"Стоматологія у Кам'янському: лікування карієсу та каналів, протезування, хірургія. Лікар Дмитро Боднар.",
-  "url":"https://bostom.com.ua/","image":"https://bostom.com.ua/video/hero-poster.jpg",
+  "url":"https://bostom.com.ua/","image":"https://bostom.com.ua/img/web/p8.jpg",
   "telephone":"+380673344000",
   "address":{"@type":"PostalAddress","streetAddress":"проспект Свободи, 50","addressLocality":"Кам'янське","postalCode":"51909","addressRegion":"Дніпропетровська область","addressCountry":"UA"},
   "areaServed":{"@type":"City","name":"Кам'янське"},
