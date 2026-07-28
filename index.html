@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  BOSTOM — стоматологія, м. Кам'янське
+  ============================================================
+  РЕАЛЬНЫЕ ДАННЫЕ (Instagram @dr.dmytro_bodnar):
+    Адрес   : проспект Свободи, 50, Кам'янське, 51900
+    Телефон : +380 67 334 40 00
+    График  : пн-пт 9:00-18:00, сб 9:00-14:00, нд вихідний
+    Telegram: t.me/BostomClinic
+    Врач    : Дмитро Боднар, 8+ лет, терапія/ортопедія/хірургія
+    Фото    : их же, из их Instagram (img/)
+
+  ПОДТВЕРДИТЬ У ВЛАДЕЛЬЦА: телефон и график взяты из сторис ~85 недель давности.
+
+  ОСТАЛОСЬ ЗАПОЛНИТЬ:
+    1. Цены (секция «Ціни»)
+    2. Оригинал логотипа (сейчас точная SVG-реплика)
+    3. TG_ENDPOINT внизу — адрес Cloudflare Worker
+    4. Отзывы — только реальные, с разрешения пациентов
+  ============================================================
+-->
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Стоматологія в Кам'янському — BOSTOM, пр. Свободи 50 | Лікування без болю</title>
+<meta name="description" content="Стоматологія BOSTOM у Кам'янському, проспект Свободи 50. Лікування карієсу та каналів, протезування, видалення зубів. Лікар Дмитро Боднар, 8+ років досвіду. Запис: +380 67 334 40 00.">
+<meta name="keywords" content="стоматологія Кам'янське, стоматолог Кам'янське, лікування зубів Кам'янське, протезування зубів, видалення зуба, BOSTOM">
+<!-- ДЕМО: закрыто от Google, чтобы не появилась вторая страница клиники,
+     которую никто не согласовывал. ПЕРЕД ЗАПУСКОМ на реальном домене
+     удалить строку noindex ниже и раскомментировать обычную. -->
+<meta name="robots" content="noindex, nofollow">
+<!-- <meta name="robots" content="index, follow, max-image-preview:large"> -->
+<meta name="geo.region" content="UA-12">
+<meta name="geo.placename" content="Кам'янське">
+<meta name="theme-color" content="#0E1116">
+<link rel="canonical" href="https://bostom.com.ua/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BOSTOM — стоматологія">
+<meta property="og:title" content="Стоматологія BOSTOM — Кам'янське, проспект Свободи 50">
+<meta property="og:description" content="Терапія, ортопедія, хірургія. Лікар Дмитро Боднар, 8+ років досвіду. Лікування без болю.">
+<meta property="og:image" content="https://bostom.com.ua/img/web/p8.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1778">
+<meta property="og:url" content="https://bostom.com.ua/">
+<meta property="og:locale" content="uk_UA">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/web/p8.webp" type="image/webp">
+
+<style>
+/* ============================================================
+   Дизайн-система BOSTOM
+   Источник — их логотип: металлический графит, серифный
+   леттеринг, синяя волна. Отсюда сталь + синий электрик.
+   ============================================================ */
+:root{
+  --bg:#0E1116; --bg-2:#141920; --surface:#191F28; --surface-2:#1F2732;
+  --line:#2A333F; --line-soft:#222A34;
+  --text:#EEF2F7; --text-2:#A8B4C2; --text-3:#6E7C8C;
+  --blue:#2E86FF; --blue-2:#1B6FE8; --blue-glow:rgba(46,134,255,.35);
+  --steel:linear-gradient(145deg,#EEF3F8 0%,#BFC9D4 30%,#93A0AE 54%,#E2E8EE 78%,#A3AEBC 100%);
+
+  --r-sm:10px; --r-md:16px; --r-lg:26px; --r-xl:40px;
+  --display:'Playfair Display',Georgia,serif;
+  --body:'Manrope','Segoe UI',sans-serif;
+  --pad:clamp(18px,5vw,60px);
+  --maxw:1240px;
+  --gap:clamp(52px,7vw,100px);   /* единый промежуток между блоками */
+  --hdr:126px;          /* высота липкой шапки; уточняется скриптом по факту */
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--body);font-size:17px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.1;letter-spacing:-.015em;margin:0}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+[id]{scroll-margin-top:calc(var(--hdr) + 14px)}
+
+.skip{position:absolute;left:-9999px;background:var(--blue);color:#fff;padding:12px 20px;z-index:300}
+.skip:focus{left:0;top:0}
+
+/* ---------- Демо-лента ---------- */
+.demo-bar{
+  background:linear-gradient(90deg,var(--blue-2),var(--blue));color:#fff;
+  font-size:13px;padding:9px 16px;text-align:center;
+  display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;
+}
+.demo-bar button{background:rgba(255,255,255,.2);border:0;color:#fff;border-radius:99px;padding:3px 12px;font:inherit;font-size:12px;cursor:pointer}
+
+/* ---------- Шапка: два ряда, навигация всегда видна ---------- */
+.hdr{
+  position:sticky;top:0;z-index:100;
+  background:rgba(14,17,22,.92);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.hdr-main{display:flex;align-items:center;gap:20px;height:78px}
+.logo{display:block;text-decoration:none;flex-shrink:0}
+.logo svg{display:block;height:52px;width:auto}
+.hdr-spacer{margin-left:auto}
+.hdr-phone{
+  font-family:var(--display);font-size:18px;font-weight:600;text-decoration:none;
+  white-space:nowrap;transition:color .25s;display:flex;align-items:center;gap:9px;
+}
+.hdr-phone:hover{color:var(--blue)}
+.hdr-phone small{display:block;font-family:var(--body);font-size:11.5px;font-weight:500;color:var(--text-3);letter-spacing:.04em}
+
+/* Ряд навигации — прилипает вместе с шапкой */
+.subnav{border-top:1px solid var(--line-soft);overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.subnav::-webkit-scrollbar{display:none}
+.subnav-in{display:flex;gap:6px;height:48px;align-items:center;min-width:max-content}
+.subnav a{
+  text-decoration:none;color:var(--text-2);font-size:14.5px;font-weight:500;
+  padding:7px 15px;border-radius:99px;white-space:nowrap;
+  border:1px solid transparent;transition:color .22s,background .22s,border-color .22s;
+}
+.subnav a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.subnav a.active{color:#fff;background:rgba(46,134,255,.16);border-color:rgba(46,134,255,.5)}
+
+/* ---------- Кнопки ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--body);font-weight:600;font-size:15px;padding:13px 26px;
+  border-radius:99px;border:1px solid transparent;text-decoration:none;cursor:pointer;
+  white-space:nowrap;transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s,background .22s,color .22s,border-color .22s;
+}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 26px -10px var(--blue-glow)}
+.btn-primary:hover{background:var(--blue-2);transform:translateY(-2px);box-shadow:0 16px 34px -12px var(--blue-glow)}
+.btn-ghost{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+.btn-lg{padding:17px 34px;font-size:16.5px}
+.btn[disabled]{opacity:.55;pointer-events:none}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:clamp(34px,5vw,70px) 0 var(--gap);overflow:hidden}
+.hero::before{
+  content:"";position:absolute;width:min(880px,110vw);aspect-ratio:1;right:-24%;top:-40%;
+  background:radial-gradient(circle,rgba(46,134,255,.15),transparent 62%);pointer-events:none;
+}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(28px,5vw,64px);align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:22px;
+}
+.eyebrow::before{content:"";width:30px;height:1.5px;background:var(--blue)}
+h1{font-size:clamp(34px,5.6vw,66px);font-weight:600}
+h1 .sheen{background:var(--steel);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 em{font-style:italic;color:var(--blue)}
+.hero-lead{font-size:clamp(16.5px,1.8vw,19px);color:var(--text-2);margin-top:24px;max-width:48ch}
+.hero-cta{display:flex;gap:13px;margin-top:32px;flex-wrap:wrap}
+.hero-facts{
+  display:flex;gap:26px;flex-wrap:wrap;margin-top:30px;padding-top:26px;
+  border-top:1px solid var(--line);
+}
+.hero-fact b{display:block;font-family:var(--display);font-size:26px;line-height:1;
+  background:var(--steel);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-fact span{font-size:13.5px;color:var(--text-3)}
+
+.hero-photo{
+  position:relative;border-radius:var(--r-xl) var(--r-xl) var(--r-xl) 90px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:0 40px 90px -50px rgba(0,0,0,.95);
+  aspect-ratio:4/5;background:var(--surface-2);
+}
+.hero-photo picture,.doc-photo picture,.work picture{display:block;width:100%;height:100%}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.hero-photo figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:52px 26px 22px;
+  background:linear-gradient(transparent,rgba(10,13,17,.9) 55%);
+  font-size:14.5px;color:var(--text-2);
+}
+.hero-photo figcaption b{display:block;font-family:var(--display);font-size:19px;color:#fff;font-weight:600}
+
+/* ---------- Полоса доверия ---------- */
+.trust{border-block:1px solid var(--line);background:var(--bg-2)}
+.trust-in{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.trust-cell{background:var(--bg-2);padding:24px 18px;text-align:center}
+.trust-cell b{display:block;font-family:var(--display);font-size:clamp(22px,3vw,32px);line-height:1;margin-bottom:7px;
+  background:var(--steel);-webkit-background-clip:text;background-clip:text;color:transparent}
+.trust-cell span{font-size:13px;color:var(--text-3)}
+
+/* ---------- Секції ----------
+   Єдиний вертикальний ритм: відступ задає ТІЛЬКИ верх секції.
+   Тоді проміжок між будь-якими двома блоками завжди однаковий. */
+section{padding:var(--gap) 0 0}
+main > section:last-of-type{padding-bottom:var(--gap)}
+.sec-head{max-width:720px;margin-bottom:clamp(30px,4.5vw,54px)}
+.sec-num{font-size:12.5px;font-weight:700;letter-spacing:.2em;color:var(--blue);display:block;margin-bottom:14px}
+h2{font-size:clamp(27px,4.2vw,47px)}
+.sec-lead{margin-top:18px;color:var(--text-2);font-size:17.5px}
+
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.svc-card{
+  background:linear-gradient(160deg,var(--surface),var(--bg-2));border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:32px 28px 28px;position:relative;overflow:hidden;
+  transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s,border-color .35s;
+}
+.svc-card::before{content:"";position:absolute;inset:auto -34% -60% auto;width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(46,134,255,.2),transparent 68%);opacity:0;transition:opacity .45s}
+.svc-card:hover{transform:translateY(-6px);border-color:var(--blue);box-shadow:0 30px 60px -35px rgba(0,0,0,.95)}
+.svc-card:hover::before{opacity:1}
+.svc-card>*{position:relative}
+.svc-ic{width:42px;height:42px;margin-bottom:20px;color:var(--blue)}
+.svc-card h3{font-size:22px;margin-bottom:11px}
+.svc-card>p{color:var(--text-3);font-size:15.5px}
+.svc-list{margin:18px 0 0;padding:0;list-style:none;font-size:15px;color:var(--text-2)}
+.svc-list li{padding:9px 0 9px 23px;position:relative;border-top:1px solid var(--line-soft)}
+.svc-list li::before{content:"";position:absolute;left:2px;top:17px;width:8px;height:8px;border-radius:50%;border:2px solid var(--blue)}
+
+.why{background:linear-gradient(150deg,var(--surface-2),var(--bg));border:1px solid var(--line);
+  border-radius:var(--r-xl);padding:clamp(30px,5vw,64px);position:relative;overflow:hidden}
+.why::after{content:"";position:absolute;right:-12%;bottom:-46%;width:540px;height:540px;border-radius:50%;
+  background:radial-gradient(circle,rgba(46,134,255,.2),transparent 66%)}
+.why>*{position:relative;z-index:1}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:28px;margin-top:40px}
+.why-item h3{font-size:18px;margin-bottom:10px;color:var(--blue)}
+.why-item p{color:var(--text-2);font-size:15.5px}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:26px;counter-reset:s}
+.step{position:relative;padding-top:44px}
+.step::before{counter-increment:s;content:"0" counter(s);position:absolute;top:0;left:0;
+  font-family:var(--display);font-size:33px;color:var(--blue);opacity:.5;line-height:1}
+.step h3{font-family:var(--body);font-weight:700;font-size:16.5px;margin-bottom:9px}
+.step p{font-size:15px;color:var(--text-3)}
+
+.price-tbl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.price-row{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 26px;border-top:1px solid var(--line-soft)}
+.price-row:first-child{border-top:none}
+.price-row:nth-child(even){background:rgba(255,255,255,.018)}
+.price-name{font-weight:500}
+.price-name small{display:block;font-weight:400;font-size:13.5px;color:var(--text-3);margin-top:2px}
+.price-val{font-family:var(--display);font-size:20px;white-space:nowrap}
+.fill{color:var(--blue);border-bottom:1.5px dashed var(--blue);font-style:normal}
+.price-note{margin-top:18px;font-size:14.5px;color:var(--text-3);max-width:64ch}
+
+/* Роботи: 4 фото, завжди 1 / 2 / 4 колонки — ряд ніколи не рветься */
+.works{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media (min-width:1100px){.works{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:560px){.works{grid-template-columns:1fr}}
+.work{
+  position:relative;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);
+  aspect-ratio:3/4;background:var(--surface-2);
+  transition:transform .35s cubic-bezier(.2,.7,.3,1),border-color .35s;
+}
+.work img{width:100%;height:100%;object-fit:cover}
+.work figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:34px 16px 13px;font-size:13px;color:var(--text-2);
+  background:linear-gradient(transparent,rgba(10,13,17,.9) 60%);
+}
+.work:hover{transform:translateY(-4px);border-color:var(--blue)}
+
+.doc{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(26px,5vw,60px);align-items:center}
+.doc-photo{border-radius:90px var(--r-xl) var(--r-xl) var(--r-xl);overflow:hidden;
+  border:1px solid var(--line);aspect-ratio:3/4;background:var(--surface-2)}
+.doc-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.doc blockquote{margin:24px 0 0;padding-left:22px;border-left:2px solid var(--blue);
+  font-size:18.5px;line-height:1.55;color:var(--text-2);font-style:italic}
+.doc-facts{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:11px}
+.doc-facts li{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:var(--text-2)}
+.doc-facts svg{flex-shrink:0;margin-top:4px;color:var(--blue)}
+
+/* ===== Відгуки: два різні світи ===== */
+.src-head{display:flex;align-items:center;gap:13px;margin:0 0 20px}
+.src-head h3{font-size:21px}
+.src-head .line{flex:1;height:1px;background:var(--line)}
+
+/* --- Google: світлий блок, щоб читався як Google з першого погляду --- */
+.google-zone{
+  background:#F6F8FB;color:#1E252E;border-radius:var(--r-xl);
+  padding:clamp(24px,3.5vw,42px);
+}
+.google-zone .src-head h3{color:#1E252E}
+.google-zone .src-head .line{background:#DCE2EA}
+
+.g-rating{display:flex;align-items:center;gap:clamp(16px,3vw,34px);flex-wrap:wrap;
+  padding-bottom:26px;border-bottom:1px solid #DCE2EA;margin-bottom:26px}
+.g-score{display:flex;align-items:center;gap:15px}
+.g-num{font-family:var(--display);font-size:54px;line-height:1;color:#1E252E}
+.stars{display:flex;gap:3px;margin-bottom:4px}
+.stars svg{width:17px;height:17px;color:#F5A623}
+.g-logo{display:flex;align-items:center;gap:7px;font-size:14.5px;color:#5A6675;font-weight:600}
+.g-meta{font-size:14px;color:#6B7684}
+.g-cta{display:flex;gap:11px;margin-left:auto;flex-wrap:wrap}
+.btn-google{background:#1A73E8;color:#fff;box-shadow:0 8px 22px -10px rgba(26,115,232,.7)}
+.btn-google:hover{background:#1660CC;transform:translateY(-2px)}
+.btn-google-ghost{border-color:#C9D2DD;color:#3C4756;background:#fff}
+.btn-google-ghost:hover{border-color:#1A73E8;color:#1A73E8;transform:translateY(-2px)}
+
+.g-revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.g-rev{background:#fff;border:1px solid #E3E8EF;border-radius:var(--r-md);padding:22px 20px;
+  display:flex;flex-direction:column;transition:box-shadow .3s,transform .3s}
+.g-rev:hover{transform:translateY(-3px);box-shadow:0 16px 34px -22px rgba(30,37,46,.5)}
+.g-rev .stars{margin-bottom:12px}
+.g-rev blockquote{margin:0;font-size:15px;color:#3C4756;line-height:1.6}
+.g-rev footer{margin-top:auto;padding-top:16px;display:flex;align-items:center;gap:10px}
+.g-av{width:32px;height:32px;border-radius:50%;background:#1A73E8;color:#fff;flex-shrink:0;
+  display:grid;place-items:center;font-size:13px;font-weight:700}
+.g-rev footer b{font-size:14px;font-weight:600;color:#1E252E;display:block}
+.g-rev footer span{font-size:12.5px;color:#8A94A2}
+
+/* --- Instagram: темні картки у формі сторіc --- */
+.ig-zone{margin-top:clamp(30px,4vw,54px)}
+.ig-grad{background:linear-gradient(45deg,#F9CE34,#EE2A7B 48%,#6228D7)}
+.ig-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;flex-shrink:0}
+.ig-revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.ig-story{
+  border-radius:24px;padding:2px;
+  transition:transform .35s cubic-bezier(.2,.7,.3,1);
+}
+.ig-story:hover{transform:translateY(-5px)}
+.ig-inner{
+  background:#12161C;border-radius:22px;overflow:hidden;
+  display:flex;flex-direction:column;height:100%;
+}
+/* сам знімок сторіc — реальний, з тексту пацієнта */
+.ig-shot{position:relative;aspect-ratio:560/994;background:#0B0E13;overflow:hidden}
+.ig-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.ig-shot::after{content:"";position:absolute;inset:auto 0 0;height:58%;
+  background:linear-gradient(transparent,rgba(11,14,19,.92));pointer-events:none}
+.ig-bar{position:absolute;top:11px;left:11px;right:11px;display:flex;gap:3px;z-index:2}
+.ig-bar i{flex:1;height:2px;border-radius:2px;background:rgba(255,255,255,.3)}
+.ig-bar i:first-child{background:rgba(255,255,255,.9)}
+.ig-who{position:absolute;left:14px;right:14px;top:22px;display:flex;align-items:center;gap:9px;z-index:2}
+.ig-av{width:30px;height:30px;border-radius:50%;padding:2px;flex-shrink:0}
+.ig-av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;
+  background:#12161C;color:#fff;font-size:12px;font-weight:700}
+.ig-who b{font-size:13px;font-weight:600;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.ig-body{padding:18px 19px 20px;display:flex;flex-direction:column;flex:1}
+.ig-story blockquote{margin:0;font-size:15px;line-height:1.55;color:#DDE4EC}
+.ig-foot{margin-top:auto;padding-top:16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ig-handle{font-size:13.5px;color:var(--text-3)}
+.ig-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;
+  color:#fff;text-decoration:none;opacity:.8;min-height:34px;padding-inline:2px}
+.ig-link:hover{opacity:1}
+
+.rev-note{margin-top:20px;font-size:14.5px;color:var(--text-3)}
+@media (max-width:700px){
+  .g-cta{margin-left:0;width:100%}.g-cta .btn{flex:1}
+  .google-zone{border-radius:var(--r-lg)}
+}
+@media (max-width:520px){.ig-inner{aspect-ratio:auto;min-height:270px}}
+
+.faq{max-width:880px}
+details{border-bottom:1px solid var(--line);padding:4px 0}
+summary{cursor:pointer;list-style:none;padding:19px 46px 19px 0;position:relative;
+  font-family:var(--display);font-size:clamp(16.5px,2vw,20px);font-weight:500}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:9px;top:50%;width:11px;height:11px;
+  border-right:1.6px solid var(--blue);border-bottom:1.6px solid var(--blue);
+  transform:translateY(-70%) rotate(45deg);transition:transform .3s}
+details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+details p{padding:0 40px 20px 0;color:var(--text-2);font-size:16px}
+
+.book{background:linear-gradient(150deg,var(--surface-2),var(--bg-2));border:1px solid var(--line);
+  border-radius:var(--r-xl);padding:clamp(26px,5vw,60px)}
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,52px);align-items:start}
+form{display:grid;gap:15px}
+.field label{display:block;font-size:13.5px;font-weight:600;margin-bottom:7px;color:var(--text-2)}
+.field input,.field select,.field textarea{
+  width:100%;padding:14px 17px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--bg);font:inherit;font-size:16px;color:var(--text);
+  transition:border-color .22s,box-shadow .22s;
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-3)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(46,134,255,.16)}
+.field input[aria-invalid="true"]{border-color:#E5484D}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.form-note{font-size:12.8px;color:var(--text-3)}
+.msg{display:none;padding:17px 21px;border-radius:var(--r-md);font-size:15.5px;margin-top:4px}
+.msg.ok{background:rgba(63,208,124,.1);border:1px solid rgba(63,208,124,.4);color:#8BE0AE}
+.msg.err{background:rgba(229,72,77,.1);border:1px solid rgba(229,72,77,.4);color:#F5A3A5}
+
+.contact-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:17px}
+.contact-list li{display:flex;gap:14px;align-items:flex-start}
+.contact-list svg{flex-shrink:0;margin-top:3px;color:var(--blue)}
+.contact-list b{display:block;font-family:var(--display);font-size:17px;font-weight:600}
+.contact-list b a{text-decoration:none}
+.contact-list span{font-size:14.5px;color:var(--text-3)}
+.map{margin-top:24px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);line-height:0}
+.map iframe{width:100%;height:280px;border:0;filter:grayscale(.5) invert(.92) hue-rotate(180deg) contrast(.9)}
+
+footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--text-3);padding:50px 0 30px;font-size:14.5px}
+.ft-top{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;padding-bottom:26px;border-bottom:1px solid var(--line)}
+.ft-soc{display:flex;gap:11px}
+.ft-soc a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
+  transition:background .25s,transform .25s,border-color .25s}
+.ft-soc a:hover{background:var(--blue);border-color:var(--blue);color:#fff;transform:translateY(-3px)}
+.ft-bot{padding-top:22px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:13px;opacity:.8}
+
+.mob-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:120;display:none;gap:10px;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(14,17,22,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);
+}
+.mob-bar .btn{flex:1;padding:14px 10px;font-size:15px}
+
+.to-top{position:fixed;right:20px;bottom:20px;z-index:90;width:44px;height:44px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--line);color:var(--text);cursor:pointer;
+  display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .3s,visibility .3s,transform .3s,border-color .25s}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{border-color:var(--blue);color:var(--blue)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.rise{opacity:0;transform:translateY(20px);animation:rise .85s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.25s}.d4{animation-delay:.35s}.d5{animation-delay:.45s}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal,.rise{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-photo{max-width:420px;margin-inline:auto;order:-1}
+  .doc{grid-template-columns:1fr}
+  .doc-photo{max-width:330px}
+  .book-grid{grid-template-columns:1fr}
+  .trust-in{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .hdr-phone small{display:none}
+  /* тап-зона не менше 44px — інакше в телефон важко влучити пальцем */
+  .hdr-phone{font-size:16px;min-height:44px;padding:0 6px}
+}
+@media (max-width:640px){
+  :root{--hdr:110px}
+  body{font-size:16px;padding-bottom:76px}
+  .hdr-main{height:62px;gap:12px}
+  .subnav-in{height:48px}
+  .hdr .btn{display:none}
+  .logo svg{height:42px}
+  .price-row{flex-direction:column;align-items:flex-start;gap:4px}
+  .mob-bar{display:flex}
+  .to-top{bottom:86px;right:14px}
+  .why,.book{border-radius:var(--r-lg)}
+  .hero-facts{gap:20px}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Перейти до вмісту</a>
+
+<!-- ДЕМО-ЛЕНТА: видалити перед публікацією -->
+<div class="demo-bar" id="demoBar">
+  <span><b>ДЕМО.</b> Ціни заповнює клініка. Телефон і графік — звірити з власником.</span>
+  <button type="button" onclick="this.parentNode.remove()">Сховати</button>
+</div>
+
+<header class="hdr">
+  <div class="wrap hdr-main">
+    <a class="logo" href="#top" aria-label="BOSTOM — стоматологія, на початок">
+      <!-- Репліка логотипу клініки. ЗАПОЛНИТЬ: замінити на оригінал. -->
+      <svg viewBox="0 0 200 100" role="img" aria-label="BOSTOM стоматологія">
+        <defs>
+          <linearGradient id="steelG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F4F8FC"/><stop offset=".3" stop-color="#C6D0DB"/>
+            <stop offset=".55" stop-color="#98A5B3"/><stop offset=".8" stop-color="#E8EEF4"/>
+            <stop offset="1" stop-color="#A8B3C1"/>
+          </linearGradient>
+          <linearGradient id="blueG" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#0A3B87"/><stop offset=".5" stop-color="#3D93FF"/>
+            <stop offset="1" stop-color="#0A3B87"/>
+          </linearGradient>
+        </defs>
+        <!-- крона зуба: два бугра, як в оригіналі -->
+        <path d="M62 42C62 22 71 12 84 12c9 0 14 6 16 11 2-5 7-11 16-11 13 0 22 10 22 30"
+              fill="none" stroke="url(#steelG)" stroke-width="2.6" stroke-linecap="round"/>
+        <!-- бічні лінії -->
+        <path d="M12 42h46M142 42h46" stroke="url(#steelG)" stroke-width="1.3" stroke-linecap="round" opacity=".8"/>
+        <!-- назва -->
+        <text x="100" y="70" text-anchor="middle" fill="url(#steelG)"
+              font-family="Playfair Display, Georgia, serif" font-size="30" font-weight="600"
+              letter-spacing="2.2" dx="-1.1">BOSTOM</text>
+        <text x="100" y="83" text-anchor="middle" fill="#7E8B99"
+              font-family="Manrope, sans-serif" font-size="8" font-weight="500"
+              letter-spacing="4.6" dx="-2.3">СТОМАТОЛОГІЯ</text>
+        <!-- сині корені -->
+        <path d="M70 90c7.5 0 7.5 9 15 9s7.5-9 15-9 7.5 9 15 9 7.5-9 15-9"
+              fill="none" stroke="url(#blueG)" stroke-width="4.2" stroke-linecap="round"/>
+      </svg>
+    </a>
+
+    <span class="hdr-spacer"></span>
+
+    <a class="hdr-phone" href="tel:+380673344000">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span>+380 67 334 40 00<small>пн–пт 9:00–18:00 · сб 9:00–14:00</small></span>
+    </a>
+    <a class="btn btn-primary" href="#zapys">Записатися</a>
+  </div>
+
+  <!-- Навігація прилипає разом із шапкою і видима завжди -->
+  <nav class="subnav" aria-label="Розділи сторінки">
+    <div class="wrap subnav-in" id="subnav">
+      <a href="#poslugy">Послуги</a>
+      <a href="#chomu">Чому ми</a>
+      <a href="#yak">Як проходить</a>
+      <a href="#ciny">Ціни</a>
+      <a href="#roboty">Роботи</a>
+      <a href="#likar">Лікар</a>
+      <a href="#pytannya">Питання</a>
+      <a href="#kontakty">Контакти</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow rise d1">Кам'янське · проспект Свободи, 50</span>
+      <h1 class="rise d2"><span class="sheen">Стоматологія,</span><br>до якої <em>не страшно</em><br><span class="sheen">йти</span></h1>
+      <p class="hero-lead rise d3">
+        Лікування карієсу та каналів, протезування і хірургія — в одних руках.
+        Сучасне знеболення, спокійний темп і план лікування з цінами, який ви бачите
+        ще до початку роботи.
+      </p>
+      <div class="hero-cta rise d4">
+        <a class="btn btn-primary btn-lg" href="#zapys">Записатися на прийом</a>
+        <a class="btn btn-ghost btn-lg" href="tel:+380673344000">+380 67 334 40 00</a>
+      </div>
+      <div class="hero-facts rise d5">
+        <div class="hero-fact"><b>8+</b><span>років практики</span></div>
+        <div class="hero-fact"><b>3</b><span>напрями лікування</span></div>
+        <div class="hero-fact"><b>6</b><span>днів на тиждень</span></div>
+      </div>
+    </div>
+
+    <figure class="hero-photo rise d3" style="margin:0">
+      <picture>
+        <source srcset="img/web/p8.webp" type="image/webp">
+        <img src="img/web/p8.jpg" width="1000" height="1778" alt="Лікар-стоматолог Дмитро Боднар у клініці BOSTOM, Кам'янське" fetchpriority="high">
+      </picture>
+      <figcaption><b>Дмитро Боднар</b>лікар-стоматолог, понад 8 років практики</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= ДОВІРА ================= -->
+<div class="trust">
+  <div class="trust-in">
+    <div class="trust-cell"><b>8+</b><span>років досвіду лікаря</span></div>
+    <div class="trust-cell"><b>3</b><span>терапія · ортопедія · хірургія</span></div>
+    <div class="trust-cell"><b>1</b><span>лікар веде вас від початку</span></div>
+    <div class="trust-cell"><b>0</b><span>болю під час лікування</span></div>
+  </div>
+</div>
+
+<!-- ================= ПОСЛУГИ ================= -->
+<section id="poslugy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">01 — Послуги</span>
+      <h2>Три напрями, один лікар</h2>
+      <p class="sec-lead">Вас не передають з кабінету в кабінет. Діагностика, лікування та подальший контроль — в одних руках.</p>
+    </div>
+    <div class="svc">
+      <article class="svc-card reveal">
+        <svg class="svc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M24 12c-4-4-12-4-14 3-2 7 2 12 3 18 1 5 2 8 4 8s3-6 7-6 5 6 7 6 3-3 4-8c1-6 5-11 3-18-2-7-10-7-14-3z"/>
+        </svg>
+        <h3>Терапія</h3>
+        <p>Лікування карієсу та каналів зі збереженням максимуму живої тканини зуба.</p>
+        <ul class="svc-list"><li>Лікування карієсу</li><li>Лікування каналів</li><li>Художня реставрація</li><li>Професійна гігієна</li></ul>
+      </article>
+      <article class="svc-card reveal">
+        <svg class="svc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <rect x="9" y="15" width="30" height="21" rx="5"/><path d="M16 15V11a8 8 0 0 1 16 0v4M24 22v7"/>
+        </svg>
+        <h3>Ортопедія</h3>
+        <p>Коронки, вініри та протези, які повертають жування і не виглядають штучно.</p>
+        <ul class="svc-list"><li>Коронки та вініри</li><li>Мостоподібні протези</li><li>Знімне протезування</li><li>Протезування на імплантах</li></ul>
+      </article>
+      <article class="svc-card reveal">
+        <svg class="svc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M24 6v12M18 12h12M15 22h18l-3 20H18z"/>
+        </svg>
+        <h3>Хірургія</h3>
+        <p>Видалення будь-якої складності та підготовка до подальшого протезування.</p>
+        <ul class="svc-list"><li>Видалення зубів</li><li>Видалення «вісімок»</li><li>Підготовка до імплантації</li><li>Малі операції на яснах</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЧОМУ ================= -->
+<section id="chomu">
+  <div class="wrap">
+    <div class="why reveal">
+      <span class="sec-num">02 — Чому до нас</span>
+      <h2>Ми знаємо, чого ви<br>боїтеся насправді</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Боляче не буде</h3>
+          <p>Сучасна анестезія і спокійний темп. Відчули дискомфорт — підняли руку, лікар зупиняється. Ніхто не «терпить до кінця».</p>
+        </div>
+        <div class="why-item">
+          <h3>Ціна не зміниться в процесі</h3>
+          <p>План лікування з вартістю ви бачите до того, як почалася робота. Без сюрпризів у кріслі.</p>
+        </div>
+        <div class="why-item">
+          <h3>Вам пояснять людською мовою</h3>
+          <p>Що саме відбувається з зубом, які є варіанти, скільки коштує кожен і що буде, якщо не робити нічого.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЯК ПРОХОДИТЬ ================= -->
+<section id="yak">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">03 — Як проходить</span>
+      <h2>Чотири кроки</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Запис</h3><p>Телефон, Telegram або форма на сайті. Підбираємо зручний час.</p></div>
+      <div class="step reveal"><h3>Огляд і знімок</h3><p>Дивимось, що є насправді, а не «на око». Шукаємо причину, а не наслідок.</p></div>
+      <div class="step reveal"><h3>План і вартість</h3><p>Показуємо варіанти та ціну кожного. Рішення приймаєте ви, без тиску.</p></div>
+      <div class="step reveal"><h3>Лікування</h3><p>Працюємо в комфортному темпі. Після — контроль і рекомендації.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЦІНИ ================= -->
+<section id="ciny">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">04 — Вартість</span>
+      <h2>Ціни без «від»</h2>
+      <p class="sec-lead">Точну суму ви дізнаєтесь на консультації, до початку лікування.</p>
+    </div>
+    <div class="price-tbl reveal">
+      <!-- ЗАПОЛНИТЬ: реальні ціни клініки -->
+      <div class="price-row"><div class="price-name">Консультація та огляд<small>Огляд, діагностика, план лікування</small></div><div class="price-val"><i class="fill">___</i> ₴</div></div>
+      <div class="price-row"><div class="price-name">Професійна гігієна<small>Ультразвук, Air Flow, поліровка</small></div><div class="price-val"><i class="fill">___</i> ₴</div></div>
+      <div class="price-row"><div class="price-name">Лікування карієсу<small>З фотополімерною реставрацією</small></div><div class="price-val"><i class="fill">___</i> ₴</div></div>
+      <div class="price-row"><div class="price-name">Лікування каналів<small>Ціна за один канал</small></div><div class="price-val"><i class="fill">___</i> ₴</div></div>
+      <div class="price-row"><div class="price-name">Видалення зуба<small>Складність визначає лікар на огляді</small></div><div class="price-val"><i class="fill">___</i> ₴</div></div>
+      <div class="price-row"><div class="price-name">Металокерамічна коронка<small>З урахуванням роботи зубного техніка</small></div><div class="price-val"><i class="fill">___</i> ₴</div></div>
+    </div>
+    <p class="price-note">Ми свідомо не публікуємо приблизні цифри «від», щоб на прийомі ви не побачили іншу суму. Остаточна вартість фіксується в плані лікування до початку роботи.</p>
+  </div>
+</section>
+
+<!-- ================= РОБОТИ ================= -->
+<section id="roboty">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">05 — Роботи</span>
+      <h2>До і після</h2>
+      <p class="sec-lead">Реальні випадки з практики лікаря. Фото публікуються за згодою пацієнтів.</p>
+    </div>
+    <div class="works">
+      <figure class="work reveal" style="margin:0">
+        <picture>
+          <source srcset="img/web/p3.webp" type="image/webp">
+          <img src="img/web/p3.jpg" width="800" height="431" loading="lazy" decoding="async" alt="Заміна старої амальгамної пломби на фотополімерну реставрацію">
+        </picture>
+        <figcaption>Заміна старої пломби</figcaption>
+      </figure>
+      <figure class="work reveal" style="margin:0">
+        <picture>
+          <source srcset="img/web/p4.webp" type="image/webp">
+          <img src="img/web/p4.jpg" width="800" height="1067" loading="lazy" decoding="async" alt="Лікування карієсу між зубами з відновленням контактного пункту">
+        </picture>
+        <figcaption>Карієс між зубами</figcaption>
+      </figure>
+      <figure class="work reveal" style="margin:0">
+        <picture>
+          <source srcset="img/web/p5.webp" type="image/webp">
+          <img src="img/web/p5.jpg" width="800" height="1021" loading="lazy" decoding="async" alt="Лікування каналів зуба з подальшою реставрацією коронкової частини">
+        </picture>
+        <figcaption>Лікування каналів</figcaption>
+      </figure>
+      <figure class="work reveal" style="margin:0">
+        <picture>
+          <source srcset="img/web/p2.webp" type="image/webp">
+          <img src="img/web/p2.jpg" width="800" height="625" loading="lazy" decoding="async" alt="Лікування прихованого карієсу жувальних зубів під ізоляцією">
+        </picture>
+        <figcaption>Прихований карієс</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЛІКАР ================= -->
+<section id="likar">
+  <div class="wrap doc">
+    <div class="doc-photo reveal">
+      <picture>
+        <source srcset="img/web/p7.webp" type="image/webp">
+        <img src="img/web/p7.jpg" width="900" height="1600" loading="lazy" decoding="async" alt="Лікар Дмитро Боднар під час лікування зуба в клініці BOSTOM">
+      </picture>
+    </div>
+    <div class="reveal">
+      <span class="sec-num">06 — Лікар</span>
+      <h2>Дмитро Боднар</h2>
+      <blockquote>«Пацієнт має розуміти, що з ним роблять і скільки це коштує, ще до того, як сів у крісло.»</blockquote>
+      <ul class="doc-facts">
+        <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Понад 8 років практики</span></li>
+        <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Терапія, ортопедія та хірургія — повний цикл в одних руках</span></li>
+        <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Робота під ізоляцією та сучасні протоколи знеболення</span></li>
+        <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Веде пацієнта від першого огляду до контрольного візиту</span></li>
+      </ul>
+      <div class="hero-cta" style="margin-top:30px">
+        <a class="btn btn-primary" href="#zapys">Записатися до лікаря</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Роботи в Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ВІДГУКИ ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">07 — Відгуки</span>
+      <h2>Що кажуть пацієнти</h2>
+    </div>
+    <!-- Усі відгуки справжні: з картки Google та зі сторіc пацієнтів в Instagram.
+         Вигаданих немає і не буде.
+         ЗАПОЛНИТЬ (опционально): скриншоты сторис от Дмитрия — тогда карточки
+         Instagram получат настоящие фото фоном вместо градиента. -->
+
+    <!-- ===== GOOGLE ===== -->
+    <div class="google-zone reveal">
+      <div class="src-head">
+        <svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#4285F4" d="M45 24.5c0-1.6-.1-2.8-.4-4H24v7.3h12c-.2 2-1.5 5-4.4 7l6.7 5.2C42.2 36.3 45 31 45 24.5z"/>
+          <path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-7.1 5.5C8 41.2 15.4 46 24 46z"/>
+          <path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7.1-5.5C2.9 17 2 20.4 2 24s.9 7 2.4 9.9l7.1-5.5z"/>
+          <path fill="#EA4335" d="M24 10.6c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.5 29.9 2 24 2 15.4 2 8 6.8 4.4 14.1l7.1 5.5C13.3 14.3 18.2 10.6 24 10.6z"/>
+        </svg>
+        <h3>Відгуки в Google Картах</h3>
+        <span class="line"></span>
+      </div>
+
+      <div class="g-rating">
+        <div class="g-score">
+          <span class="g-num">5,0</span>
+          <div>
+            <div class="stars" aria-label="Оцінка 5 з 5">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            </div>
+            <div class="g-logo">
+              <svg width="15" height="15" viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#4285F4" d="M45 24.5c0-1.6-.1-2.8-.4-4H24v7.3h12c-.2 2-1.5 5-4.4 7l6.7 5.2C42.2 36.3 45 31 45 24.5z"/>
+                <path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-7.1 5.5C8 41.2 15.4 46 24 46z"/>
+                <path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7.1-5.5C2.9 17 2 20.4 2 24s.9 7 2.4 9.9l7.1-5.5z"/>
+                <path fill="#EA4335" d="M24 10.6c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.5 29.9 2 24 2 15.4 2 8 6.8 4.4 14.1l7.1 5.5C13.3 14.3 18.2 10.6 24 10.6z"/>
+              </svg>
+              Google
+            </div>
+          </div>
+        </div>
+        <div class="g-meta">4 відгуки · оцінка 5,0<br>Кам'янське, проспект Свободи, 50</div>
+        <div class="g-cta">
+          <a class="btn btn-google" href="https://maps.google.com/?cid=15812689250589943566" target="_blank" rel="noopener">Залишити відгук</a>
+          <a class="btn btn-google-ghost" href="https://maps.google.com/?cid=15812689250589943566" target="_blank" rel="noopener">Читати всі</a>
+        </div>
+      </div>
+
+      <div class="g-revs">
+        <article class="g-rev">
+          <div class="stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          </div>
+          <blockquote>Дуже гарна стоматологія. Приємний та професійний лікар. Дуже дбайливо ставляться до пацієнтів. Працюють не на кількість, а на якість! Кожному приділяють максимум часу і уваги. Результатом лікування задоволена на всі 100%.</blockquote>
+          <footer><span class="g-av">О</span><span><b>Оля Збарах</b><span>рік тому</span></span></footer>
+        </article>
+
+        <article class="g-rev">
+          <div class="stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          </div>
+          <blockquote>Лікування пройшло в комфортних умовах та я отримала якісний результат. Зубки здорові не за всі гроші світу 😅</blockquote>
+          <footer><span class="g-av">А</span><span><b>Анна Крисанова</b><span>рік тому</span></span></footer>
+        </article>
+
+        <article class="g-rev">
+          <div class="stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          </div>
+          <blockquote>Хороша клініка.</blockquote>
+          <footer><span class="g-av">A</span><span><b>Arystarkh Mostovyi</b><span>2 місяці тому</span></span></footer>
+        </article>
+      </div>
+    </div>
+
+    <!-- ===== INSTAGRAM ===== -->
+    <div class="ig-zone reveal">
+      <div class="src-head">
+        <span class="ig-mark ig-grad">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>
+        </span>
+        <h3>Сторіc пацієнтів в Instagram</h3>
+        <span class="line"></span>
+      </div>
+
+      <div class="ig-revs">
+        <article class="ig-story ig-grad">
+          <div class="ig-inner">
+            <div class="ig-shot">
+              <div class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="ig-who"><span class="ig-av ig-grad"><span>К</span></span><b>dudka_ksenia</b></div>
+              <picture>
+                <source srcset="img/stories/web/st1.webp" type="image/webp">
+                <img src="img/stories/web/st1.jpg" width="560" height="994" loading="lazy" decoding="async"
+                     alt="Сторіc пацієнтки про стоматологію BOSTOM у Кам'янському">
+              </picture>
+            </div>
+            <div class="ig-body">
+              <blockquote>Коли приїжджаю до Кам'янського, зі спокійною душею тільки до BOSTOM.</blockquote>
+              <div class="ig-foot">
+                <span class="ig-handle">@dudka_ksenia</span>
+                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="ig-story ig-grad">
+          <div class="ig-inner">
+            <div class="ig-shot">
+              <div class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="ig-who"><span class="ig-av ig-grad"><span>А</span></span><b>anna.nedilkoo</b></div>
+              <picture>
+                <source srcset="img/stories/web/st4.webp" type="image/webp">
+                <img src="img/stories/web/st4.jpg" width="560" height="994" loading="lazy" decoding="async"
+                     alt="Сторіc пацієнтки: затишна зона очікування клініки BOSTOM">
+              </picture>
+            </div>
+            <div class="ig-body">
+              <blockquote>Сьогодні нарешті дійшла черга до лікування зубів. Від цього місця віє затишком та професіоналізмом.</blockquote>
+              <div class="ig-foot">
+                <span class="ig-handle">@anna.nedilkoo</span>
+                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="ig-story ig-grad">
+          <div class="ig-inner">
+            <div class="ig-shot">
+              <div class="ig-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="ig-who"><span class="ig-av ig-grad"><span>А</span></span><b>anna.nedilkoo</b></div>
+              <picture>
+                <source srcset="img/stories/web/st5.webp" type="image/webp">
+                <img src="img/stories/web/st5.jpg" width="560" height="994" loading="lazy" decoding="async"
+                     alt="Сторіc пацієнтки про виявлений прихований карієс у клініці BOSTOM">
+              </picture>
+            </div>
+            <div class="ig-body">
+              <blockquote>Не нехтуйте візитами до стоматолога! У мене була зовсім маленька крапочка на зубі, яка абсолютно ніяк не турбувала мене. АЛЕ під нею всередині виявилась катастрофа — яку лікар ювелірно усунув.</blockquote>
+              <div class="ig-foot">
+                <span class="ig-handle">@anna.nedilkoo</span>
+                <a class="ig-link" href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener">Instagram →</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+    <p class="rev-note reveal">Усі відгуки справжні: з картки клініки в Google Картах та зі сторіc пацієнтів в Instagram.</p>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="pytannya">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">08 — Питання</span>
+      <h2>Коротко про головне</h2>
+    </div>
+    <div class="faq reveal">
+      <details open>
+        <summary>Чи буде боляче?</summary>
+        <p>Лікування проводиться під сучасною місцевою анестезією. Знеболення виконується тонкою голкою після попередньої обробки ясен гелем, тому сам укол майже не відчувається. Якщо під час роботи ви відчуєте дискомфорт — підніміть руку, лікар зупиниться.</p>
+      </details>
+      <details>
+        <summary>Скільки коштує лікування?</summary>
+        <p>Точну вартість визначають після огляду та знімка, бо вона залежить від стану зуба. План лікування з цінами ви отримуєте до початку роботи, і сума в процесі не змінюється.</p>
+      </details>
+      <details>
+        <summary>Скільки триває прийом?</summary>
+        <p>Первинна консультація з оглядом — приблизно 30 хвилин. Лікування карієсу зазвичай проводиться за один візит, лікування каналів може потребувати двох.</p>
+      </details>
+      <details>
+        <summary>Як записатися на прийом?</summary>
+        <p>Зателефонуйте за номером +380 67 334 40 00, напишіть у Telegram чи Instagram, або залиште заявку у формі нижче — ми передзвонимо та узгодимо зручний час.</p>
+      </details>
+      <details>
+        <summary>Де знаходиться клініка і коли працює?</summary>
+        <p>Кам'янське, проспект Свободи, 50. Понеділок–п'ятниця з 9:00 до 18:00, субота з 9:00 до 14:00, неділя — вихідний.</p>
+      </details>
+      <details>
+        <summary>Що робити, якщо зуб болить прямо зараз?</summary>
+        <p>Зателефонуйте — гострий біль намагаємось прийняти в день звернення. Не грійте щоку і не прикладайте тепле: це може погіршити стан.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЗАПИС ================= -->
+<section id="zapys">
+  <div class="wrap">
+    <div class="book reveal">
+      <div class="book-grid">
+        <div id="kontakty">
+          <span class="sec-num">09 — Контакти і запис</span>
+          <h2>Записатися на прийом</h2>
+          <p class="sec-lead">Залиште номер — передзвонимо, підберемо час і відповімо на питання ще до візиту.</p>
+          <ul class="contact-list">
+            <li>
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+              <div><b><a href="tel:+380673344000">+380 67 334 40 00</a></b><span>у робочі години</span></div>
+            </li>
+            <li>
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div><b>проспект Свободи, 50</b><span>м. Кам'янське, 51900</span></div>
+            </li>
+            <li>
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <div><b>пн–пт 9:00–18:00</b><span>субота 9:00–14:00 · неділя вихідний</span></div>
+            </li>
+            <li>
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m22 3-10 9L2 8l20-5z"/><path d="M12 12v9l3-4"/></svg>
+              <div><b><a href="https://t.me/BostomClinic" target="_blank" rel="noopener">Telegram @BostomClinic</a></b><span>швидка відповідь у месенджері</span></div>
+            </li>
+          </ul>
+          <div class="map">
+            <iframe src="https://maps.google.com/maps?q=%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%B8%2050%2C%20%D0%9A%D0%B0%D0%BC%27%D1%8F%D0%BD%D1%81%D1%8C%D0%BA%D0%B5&z=16&output=embed"
+              title="Клініка BOSTOM на карті — проспект Свободи, 50, Кам'янське" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+
+        <div>
+          <form id="bookForm" novalidate>
+            <div class="field">
+              <label for="fname">Ваше ім'я</label>
+              <input id="fname" name="name" type="text" placeholder="Як до вас звертатися" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="fphone">Номер телефону</label>
+              <input id="fphone" name="phone" type="tel" placeholder="+380 __ ___ __ __" autocomplete="tel" inputmode="tel" required>
+            </div>
+            <div class="field">
+              <label for="fsvc">З чим звертаєтесь</label>
+              <select id="fsvc" name="service">
+                <option>Не знаю, потрібна консультація</option>
+                <option>Болить зуб</option>
+                <option>Лікування карієсу</option>
+                <option>Професійна гігієна</option>
+                <option>Протезування, коронки, вініри</option>
+                <option>Видалення зуба</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fmsg">Коментар <span style="font-weight:400;color:var(--text-3)">— необов'язково</span></label>
+              <textarea id="fmsg" name="msg" rows="3" placeholder="Зручний час, деталі, питання"></textarea>
+            </div>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn btn-primary btn-lg" type="submit" id="submitBtn" style="width:100%">Відправити заявку</button>
+            <p class="form-note">Натискаючи кнопку, ви погоджуєтесь на обробку зазначених даних для запису на прийом.</p>
+          </form>
+          <div class="msg ok" id="okMsg" role="status"><b>Заявку надіслано.</b> Ми зателефонуємо найближчим часом, щоб підтвердити час візиту.</div>
+          <div class="msg err" id="errMsg" role="alert">Не вдалося відправити заявку. Зателефонуйте, будь ласка: <a href="tel:+380673344000" style="color:inherit"><b>+380 67 334 40 00</b></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <div style="font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:.08em;background:var(--steel);-webkit-background-clip:text;background-clip:text;color:transparent">BOSTOM</div>
+        <p style="margin-top:12px;max-width:36ch">Стоматологія у Кам'янському.<br>проспект Свободи, 50 · терапія, ортопедія, хірургія.</p>
+      </div>
+      <div class="ft-soc">
+        <a href="https://www.instagram.com/dr.dmytro_bodnar/" target="_blank" rel="noopener" aria-label="Instagram клініки">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://t.me/BostomClinic" target="_blank" rel="noopener" aria-label="Telegram клініки">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m22 3-10 9L2 8l20-5z"/><path d="M12 12v9l3-4"/></svg>
+        </a>
+        <a href="tel:+380673344000" aria-label="Зателефонувати в клініку">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span>© <span id="yr">2026</span> BOSTOM · Кам'янське</span>
+      <span>Інформація на сайті не є медичною консультацією.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Нагору">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<div class="mob-bar">
+  <a class="btn btn-ghost" href="tel:+380673344000">Подзвонити</a>
+  <a class="btn btn-primary" href="#zapys">Записатися</a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"Dentist",
+  "name":"BOSTOM",
+  "description":"Стоматологія у Кам'янському: лікування карієсу та каналів, протезування, хірургія. Лікар Дмитро Боднар, понад 8 років досвіду.",
+  "url":"https://bostom.com.ua/",
+  "image":"https://bostom.com.ua/img/web/p8.jpg",
+  "telephone":"+380673344000",
+  "address":{"@type":"PostalAddress","streetAddress":"проспект Свободи, 50","addressLocality":"Кам'янське","postalCode":"51900","addressRegion":"Дніпропетровська область","addressCountry":"UA"},
+  "areaServed":{"@type":"City","name":"Кам'янське"},
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"14:00"}
+  ],
+  "priceRange":"₴₴",
+  "sameAs":["https://www.instagram.com/dr.dmytro_bodnar/","https://t.me/BostomClinic"],
+  "employee":{"@type":"Person","name":"Дмитро Боднар","jobTitle":"Лікар-стоматолог"},
+  "availableService":[
+    {"@type":"MedicalProcedure","name":"Лікування карієсу"},
+    {"@type":"MedicalProcedure","name":"Лікування кореневих каналів"},
+    {"@type":"MedicalProcedure","name":"Протезування зубів"},
+    {"@type":"MedicalProcedure","name":"Видалення зубів"},
+    {"@type":"MedicalProcedure","name":"Професійна гігієна порожнини рота"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Чи буде боляче лікувати зуб?","acceptedAnswer":{"@type":"Answer","text":"Лікування проводиться під сучасною місцевою анестезією. Знеболення виконується тонкою голкою після обробки ясен гелем, тому укол майже не відчувається."}},
+    {"@type":"Question","name":"Скільки коштує лікування зубів у Кам'янському?","acceptedAnswer":{"@type":"Answer","text":"Вартість визначають після огляду та знімка. План лікування з цінами пацієнт отримує до початку роботи, і сума в процесі не змінюється."}},
+    {"@type":"Question","name":"Скільки триває прийом у стоматолога?","acceptedAnswer":{"@type":"Answer","text":"Первинна консультація з оглядом триває приблизно 30 хвилин. Лікування карієсу зазвичай за один візит."}},
+    {"@type":"Question","name":"Як записатися на прийом у BOSTOM?","acceptedAnswer":{"@type":"Answer","text":"Зателефонувати за номером +380 67 334 40 00, написати у Telegram чи Instagram або залишити заявку у формі на сайті."}},
+    {"@type":"Question","name":"Де знаходиться стоматологія BOSTOM?","acceptedAnswer":{"@type":"Answer","text":"Кам'янське, проспект Свободи, 50. Пн–пт 9:00–18:00, сб 9:00–14:00, неділя вихідний."}}
+  ]
+}
+</script>
+
+<script>
+(function(){
+  'use strict';
+
+  // ЗАПОЛНИТЬ: адрес Cloudflare Worker после деплоя (см. worker/ и ЗАПУСК.md).
+  // Пока пусто — форма работает в демо-режиме и никуда не отправляет.
+  var TG_ENDPOINT = '';
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Висоту липкої шапки міряємо по факту: від неї залежить, чи не «з'їсть»
+  // вона заголовок при переході по якорю. Хардкод тут завжди розходиться
+  // на пару пікселів через шрифти.
+  var hdrEl = document.querySelector('.hdr');
+  function syncHdrHeight(){
+    document.documentElement.style.setProperty(
+      '--hdr', Math.round(hdrEl.getBoundingClientRect().height) + 'px');
+  }
+  syncHdrHeight();
+  // Обидва обробники навмисно: resize ловить зміну ширини вікна,
+  // ResizeObserver — зміну самої шапки (шрифт підвантажився, стрічку сховали).
+  addEventListener('resize', syncHdrHeight);
+  addEventListener('load', syncHdrHeight);
+  if ('ResizeObserver' in window) new ResizeObserver(syncHdrHeight).observe(hdrEl);
+
+  var toTop = document.getElementById('toTop');
+  var subnav = document.getElementById('subnav');
+  var links = Array.prototype.slice.call(subnav.querySelectorAll('a'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+
+  /* Підсвітка активного розділу + автопрокрутка стрічки навігації до нього */
+  var activeIdx = -1;
+  function syncNav(){
+    var pos = window.scrollY + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr')) || 126) + 40;
+    var cur = -1;
+    targets.forEach(function(t, i){ if (t && t.getBoundingClientRect().top + window.scrollY <= pos) cur = i; });
+    if (cur === activeIdx) return;
+    activeIdx = cur;
+    links.forEach(function(a, i){ a.classList.toggle('active', i === cur); });
+    if (cur > -1){
+      var a = links[cur];
+      var left = a.offsetLeft - subnav.clientWidth / 2 + a.offsetWidth / 2;
+      subnav.parentNode.scrollTo({left: Math.max(0, left), behavior:'smooth'});
+    }
+  }
+
+  var ticking = false;
+  addEventListener('scroll', function(){
+    toTop.classList.toggle('show', window.scrollY > 700);
+    if (!ticking){
+      ticking = true;
+      requestAnimationFrame(function(){ syncNav(); ticking = false; });
+    }
+  }, {passive:true});
+  syncNav();
+
+  toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+  /* Поява секцій при прокрутці */
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.1, rootMargin:'0px 0px -40px'});
+    Array.prototype.forEach.call(els, function(el, i){
+      el.style.transitionDelay = (i % 3) * 85 + 'ms';
+      io.observe(el);
+    });
+  } else {
+    Array.prototype.forEach.call(els, function(el){ el.classList.add('in'); });
+  }
+
+  /* Форма запису */
+  var form = document.getElementById('bookForm');
+  var okMsg = document.getElementById('okMsg');
+  var errMsg = document.getElementById('errMsg');
+  var btn = document.getElementById('submitBtn');
+  function el(n){ return form.elements.namedItem(n); }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    okMsg.style.display = errMsg.style.display = 'none';
+
+    var nameEl = el('name'), phoneEl = el('phone');
+    var name = nameEl.value.trim();
+    var digits = phoneEl.value.replace(/\D/g,'');
+
+    nameEl.setAttribute('aria-invalid', name ? 'false' : 'true');
+    phoneEl.setAttribute('aria-invalid', digits.length >= 9 ? 'false' : 'true');
+    if (!name){ nameEl.focus(); return; }
+    if (digits.length < 9){ phoneEl.focus(); return; }
+    if (el('website').value) return;      // бот заповнив пастку
+
+    var payload = {
+      name: name, phone: phoneEl.value.trim(),
+      service: el('service').value, msg: el('msg').value.trim(), page: location.href
+    };
+
+    if (!TG_ENDPOINT){                     // демо-режим: бекенд ще не підключений
+      form.style.display = 'none';
+      okMsg.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Відправляємо…';
+    fetch(TG_ENDPOINT, {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    }).then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      form.style.display = 'none';
+      okMsg.style.display = 'block';
+    }).catch(function(){
+      errMsg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Відправити заявку';
+    });
+  });
+})();
+</script>
+</body>
+</html>

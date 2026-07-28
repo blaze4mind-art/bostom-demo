@@ -1,0 +1,14 @@
+name = "bostom-lead"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+# ЗАПОЛНИТЬ: реальный домен сайта после покупки.
+# Пока стоит "*" — принимаем заявки откуда угодно (удобно для теста,
+# перед публикацией обязательно заменить на домен).
+ALLOWED_ORIGIN = "*"
+
+# BOT_TOKEN и CHAT_ID сюда НЕ пишем — это секреты.
+# Ставятся отдельно:
+#   npx wrangler secret put BOT_TOKEN
+#   npx wrangler secret put CHAT_ID
