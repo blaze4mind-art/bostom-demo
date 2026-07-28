@@ -357,6 +357,12 @@ h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.025em}
 
 /* Сторис Instagram */
 .ig-grad{background:linear-gradient(45deg,#F9CE34,#EE2A7B 48%,#6228D7)}
+.ig-all{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  background:linear-gradient(150deg,var(--surface),var(--bg-2));border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:18px clamp(18px,3vw,26px);margin-bottom:16px}
+.ig-all b{font-family:var(--display);font-size:16.5px;font-weight:600;display:block}
+.ig-all p{font-size:14.5px;color:var(--text-3);margin-top:3px}
+@media (max-width:560px){.ig-all .btn{width:100%}}
 .ig-revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
 .ig-card{border-radius:22px;padding:2px;transition:transform .35s cubic-bezier(.2,.7,.3,1)}
 .ig-card:hover{transform:translateY(-5px)}
@@ -981,6 +987,16 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
 
     <!-- INSTAGRAM -->
     <div class="rev-pane" data-pane="instagram" hidden>
+      <div class="ig-all reveal">
+        <div>
+          <b>Актуальне «Відгуки» — 27 сторіc</b>
+          <p>Усе, що пацієнти виклали в себе й відмітили клініку.</p>
+        </div>
+        <button class="btn btn-primary" type="button" id="stAll">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          Дивитись усі
+        </button>
+      </div>
       <div class="ig-revs">
         <article class="ig-card ig-grad reveal">
           <div class="ig-in">
@@ -1414,27 +1430,44 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
      Настоящие сторис: видео, полоски прогресса, автопереход,
      тап справа/слева, удержание — пауза. Ровно как в Instagram.
      Видео без звука: так браузеры не блокируют автозапуск. */
-  var ST_DATA = {
-    st1:{v:'video/stories/web/st1.mp4', who:'dudka_ksenia', av:'К',
-         q:'Коли приїжджаю до Кам’янського, зі спокійною душею тільки до BOSTOM.'},
-    st2:{v:'video/stories/web/st2.mp4', who:'shamreo_21', av:'Ш',
-         q:'Всё топово, налетайте. Тут ушли мои страхи стоматологии.'},
-    st4:{v:'video/stories/web/st4.mp4', who:'anna.nedilkoo', av:'А',
-         q:'Від цього місця віє затишком та професіоналізмом.'},
-    st5:{v:'video/stories/web/st5.mp4', who:'anna.nedilkoo', av:'А',
-         q:'Була зовсім маленька крапочка на зубі, яка ніяк не турбувала. АЛЕ під нею виявилась катастрофа — яку лікар ювелірно усунув.'},
-    st7:{img:'img/stories/web/st7.jpg', dur:5000, who:'juliaorishchenko', av:'Ю',
-         q:'Ви найкращі ❤️'}
+  /* Полное актуальное «Відгуки» — все 27 сторіc по порядку.
+     Текст отзыва вшит в саму сторіc, поэтому подпись здесь — только автор:
+     переписывать чужие слова с картинки и рисковать ошибиться незачем.
+     v = есть видео; иначе показываем фото 5 секунд. */
+  var ST_ALL = [
+    ['00','marafet_beauty_art_studio',0], ['01','dudka_ksenia',1],
+    ['02','shamreo_21',1],                ['03','yana.amineva',1],
+    ['04','anna.nedilkoo',1],             ['05','anna.nedilkoo',1],
+    ['06','iamsemchik',0],                ['07','juliaorishchenko',0],
+    ['08','пацієнтка',1],                 ['09','lenafidanova_',1],
+    ['10','nezamai_anya',0],              ['11','shamreo_store_',0],
+    ['12','valeriya.lash_km',0],          ['13','fortusha_64',0],
+    ['14','valeriya.lash_km',1],          ['15','valeriia_olexandrivna',0],
+    ['16','liza_mai_hair',0],             ['17','anna.amineva',1],
+    ['18','ole4ka_belaya_',1],            ['19','tatiana97708',0],
+    ['20','BOSTOM',1],                    ['21','kateryna.esthetics.ua',1],
+    ['22','shazaalena',1],                ['23','anastasiya_the_alley_real',1],
+    ['24','sw_malaya_',1],                ['25','valeria_olexandrivna',0],
+    ['26','ole4ka_belaya',0]
+  ];
+  // Цитаты только там, где я прочитал текст в полном размере и уверен в нём.
+  // Остальные сторіc говорят сами за себя — текст на них и так виден.
+  var ST_QUOTE = {
+    '01':'Коли приїжджаю до Кам’янського, зі спокійною душею тільки до BOSTOM.',
+    '02':'Всё топово, налетайте. Тут ушли мои страхи стоматологии.',
+    '03':'Коли стоматолог стає одним з найулюбленіших лікарів… Дякуємо!',
+    '04':'Сьогодні нарешті дійшла черга до лікування зубів. Від цього місця віє затишком та професіоналізмом.',
+    '05':'Не нехтуйте візитами до стоматолога! Була зовсім маленька крапочка на зубі — а під нею виявилась катастрофа, яку лікар ювелірно усунув.',
+    '07':'Ви найкращі ❤️'
   };
-  // Порядок берём из разметки, а не хардкодим: переставят карточки —
-  // просмотрщик подстроится сам.
+  var STORIES = ST_ALL.map(function(r){
+    var o = {who:r[1], av:(r[1][0]||'•').toUpperCase(), q:ST_QUOTE[r[0]] || '',
+             poster:'img/stories/feed/' + r[0] + '.jpg'};
+    if (r[2]) o.v = 'video/stories/feed/' + r[0] + '.mp4';
+    else { o.img = 'img/stories/feed/' + r[0] + '.jpg'; o.dur = 5000; }
+    return o;
+  });
   var stBtns = $$('.ig-shot');
-  var STORIES = stBtns.map(function(b){
-    var key = (b.dataset.full || '').match(/st\d/);
-    var d = key ? ST_DATA[key[0]] : null;
-    if (d && !d.poster) d.poster = 'img/stories/web/' + key[0] + '.jpg';
-    return d;
-  }).filter(Boolean);
 
   var stBox = $('#stories'), stBars = $('#stBars'), stVideo = $('#stVideo'), stImg = $('#stImg'),
       stQuote = $('#stQuote'), stName = $('#stName'), stAv = $('#stAv');
@@ -1470,7 +1503,9 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
     var s = STORIES[i];
     stName.textContent = s.who;
     stAv.textContent = s.av;
-    stQuote.textContent = s.q;
+    stQuote.textContent = s.q || '';
+    stQuote.hidden = !s.q;              // без цитаты — не занимаем низ кадра
+    $('#stMeta').textContent = (i + 1) + ' з ' + STORIES.length;
 
     if (s.v){
       stImg.hidden = true;
@@ -1526,11 +1561,16 @@ footer.ft{background:var(--bg-2);border-top:1px solid var(--line);color:var(--te
     if (e.key === 'ArrowLeft') stGo(stIdx - 1);
   });
 
-  // карточки в разделе отзывов открывают просмотрщик сторис, а не картинку
-  stBtns.forEach(function(b, i){
+  // Карточка открывает просмотрщик на своей сторіc внутри полного списка:
+  // имя файла stN совпадает с номером сторіc в актуальному.
+  stBtns.forEach(function(b){
+    var m = (b.dataset.full || '').match(/st(\d+)/);
+    var idx = m ? parseInt(m[1], 10) : 0;
     b.removeAttribute('data-full');
-    b.addEventListener('click', function(){ stOpen(i); });
+    b.addEventListener('click', function(){ stOpen(idx); });
   });
+  var allBtn = $('#stAll');
+  if (allBtn) allBtn.addEventListener('click', function(){ stOpen(0); });
 
   /* --- Просмотр фото во весь экран --- */
   var viewer = $('#viewer'), vImg = $('#viewerImg'), vCap = $('#viewerCap'), lastFocus = null;
